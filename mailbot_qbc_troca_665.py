@@ -88,7 +88,6 @@ def enviar_qbc_troca_665():
         else:
             print(f"[ {pd.Timestamp.now()} ] Loja {loja} sem dados. E-mail não enviado.")
 
-#if __name__ == "__main__":
-#    enviar_pereciveis()
-
-enviar_qbc_troca_665()
+if __name__ == "__main__":
+    
+    enviar_qbc_troca_665()
