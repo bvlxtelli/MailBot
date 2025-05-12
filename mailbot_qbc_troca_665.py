@@ -30,7 +30,14 @@ def agendas(x,y):
     a = a.sort_values(by=['DT_AGENDA','VLR_TOTAL','DESCRICAO','NR_NOTA','NOME_FORNECEDOR'],ascending=False)
     a_filtro = ['CODIGO_FORNECEDOR','NOME_FORNECEDOR','PRODUTO','DESCRICAO','QUANTIDADE','VLR_TOTAL','AGENDA','FILIAL','NR_NOTA','DT_AGENDA']
     a = a[a_filtro]
-    a = a[(a['DT_AGENDA'] == ontem) & (a['CODIGO_FORNECEDOR'].isin(['107123','173630','272850','84445','450200','460028','476536','481947']))]
+
+    if dia_da_semana == 'Segunda':
+
+        a = a[(a['DT_AGENDA'] == ontem) & (a['CODIGO_FORNECEDOR'].isin(['107123','173630','272850','84445','450200','460028','476536','481947']))]
+    
+    else:
+
+        a = a[(a['DT_AGENDA'] == ontem | a['DT_AGENDA'] == anteontem | a['DT_AGENDA'] == sexta ) & (a['CODIGO_FORNECEDOR'].isin(['107123','173630','272850','84445','450200','460028','476536','481947']))]
 
     return a
 
