@@ -16,7 +16,9 @@ from mailbot import *
 print(f"[ {pd.Timestamp.now()} ] Iniciando aplicação...")
 print(f"[ {pd.Timestamp.now()} ] Buscando relatório no Thincake...")
 
-def criar_vencidos(x):
+def criar_vencidos():
+
+    x = baixar_relatorio(1262).copy()
 
     print(f"[ {pd.Timestamp.now()} ] Relatório baixado, filtrando o mesmo...")
 
@@ -48,9 +50,7 @@ def criar_vencidos(x):
 
 def criar_vencidos_rede_tudo():
 
-    vnc = criar_vencidos(baixar_relatorio(1262))
-
-    x = vnc.copy()
+    x = criar_vencidos()
 
     x['SOMA_QTD'] = x.groupby(['COD_PROD'])['QTD'].transform('sum').astype('float64')
     x['SOMA_R$'] = x.groupby(['COD_PROD'])['CUSTO_TOTAL'].transform('sum').astype('float64')
@@ -71,7 +71,7 @@ def criar_vencidos_rede_tudo():
 
 def criar_vencidos_rede(y):
 
-    x = vnc.copy()
+    x = criar_vencidos()
 
     x = x[(x['NDEPTO'].str.contains(y, case=False, na=False))]
 
@@ -94,7 +94,7 @@ def criar_vencidos_rede(y):
 
 def criar_vencidos_lojas_tudo():
 
-    x = vnc.copy()
+    x = criar_vencidos()
 
     x['SOMA_QTD'] = x.groupby(['FILIAL','COD_PROD'])['QTD'].transform('sum').astype('float64')
     x['SOMA_R$'] = x.groupby(['FILIAL','COD_PROD'])['CUSTO_TOTAL'].transform('sum').astype('float64')
@@ -116,7 +116,7 @@ def criar_vencidos_lojas_tudo():
 
 def criar_vencidos_lojas(y):
 
-    x = vnc.copy()
+    x = criar_vencidos()
 
     x = x[(x['NDEPTO'].str.contains(y, case=False, na=False))]
 
@@ -138,7 +138,7 @@ def criar_vencidos_lojas(y):
 
     return x
 
-def gerar_pdfs_vencidos(relatorios):
+def gerar_relatorios():
 
     vencidos_rede_tudo = criar_vencidos_rede_tudo()
     vencidos_rede_acougue_e_frios = criar_vencidos_rede('ACOUGUE|FRIOS')
@@ -156,8 +156,14 @@ def gerar_pdfs_vencidos(relatorios):
     'VENCIDOS - LOJAS - ACOUGUE E FRIOS': vencidos_lojas_acougue_e_frios,
     'VENCIDOS - LOJAS - MERCEARIA': vencidos_lojas_sem_pereciveis
     }
+
+    return relatorios
+
+def gerar_pdfs_vencidos():
     
     anexos = {}
+
+    relatorios = gerar_relatorios()
 
     for titulo, relatorio in relatorios.items():
         print(f"[ {pd.Timestamp.now()} ] Gerando PDF em memória: {titulo}")
@@ -244,7 +250,7 @@ def enviar_vencidos():
     """
 
     print(f"[ {pd.Timestamp.now()} ] Gerando PDFs para envio...")
-    anexos = gerar_pdfs_vencidos(relatorios)
+    anexos = gerar_pdfs_vencidos()
 
     if anexos:
         destinatario = ",".join(['jocelene.paes@bistek.com.br','uzias.souza@bistek.com.br','central.cbm@bistek.com.br'])
