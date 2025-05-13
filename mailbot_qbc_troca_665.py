@@ -37,7 +37,7 @@ def agendas(x,y):
     
     else:
 
-        a = a[(a['DT_AGENDA'] == ontem | a['DT_AGENDA'] == anteontem | a['DT_AGENDA'] == sexta ) & (a['CODIGO_FORNECEDOR'].isin(['107123','173630','272850','84445','450200','460028','476536','481947']))]
+        a = a[((a['DT_AGENDA'] == ontem) | (a['DT_AGENDA'] == anteontem) | (a['DT_AGENDA'] == sexta) ) & (a['CODIGO_FORNECEDOR'].isin(['107123','173630','272850','84445','450200','460028','476536','481947']))]
 
     return a
 
