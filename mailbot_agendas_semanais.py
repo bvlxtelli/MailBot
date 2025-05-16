@@ -64,7 +64,7 @@ def enviar_agendas():
                 qtd_semana = agd_x['QTD_SEMANA'].values[0]
                 qtd_media = agd_x['QTD_MEDIA'].values[0]
 
-                if qtd_semana < (qtd_media * 0.75):
+                if qtd_semana < (qtd_media * 0.75) and qtd_media != 0:
 
                     corpo = f"""
                     Boa dia/tarde,

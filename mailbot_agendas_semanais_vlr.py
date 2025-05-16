@@ -64,7 +64,7 @@ def enviar_agendas_por_valor():
                 qtd_semana = agd_x['VLR_SEMANA'].values[0]
                 qtd_media = agd_x['VLR_MEDIA'].values[0]
 
-                if qtd_semana < (qtd_media * 0.85):
+                if qtd_semana < (qtd_media * 0.85) and qtd_media != 0:
 
                     corpo = f"""
                     Boa dia/tarde,
@@ -74,7 +74,7 @@ def enviar_agendas_por_valor():
                     <p>Em caso de dúvidas, sinalizar <a href="mailto:central.cbm@bistek.com.br" target="_blank">@central.cbm</a>.</p>
                     """
                 
-                elif qtd_semana > (qtd_media * 1.85):
+                elif qtd_semana > (qtd_media * 1.85) and qtd_media != 0:
 
                     corpo = f"""
                     Boa dia/tarde,
