@@ -12,8 +12,6 @@ dados_login = {
 
 headers = {'User-Agent': 'Mozilla/5.0',}
 
-cookies = {'PHPSESSID': '_ga=GA1.1.523997259.1743016736; AdoptVisitorId=IzCsCNQFgY3BaADAJlMeUCGATAZvATgDYBmA+ADhgFMJrdkCSpcg; VtexRCMacIdv7=9fd34d86-68f6-47ac-b3dc-9876642b12fe; _gcl_au=1.1.1385671564.1744034336; vtex-search-anonymous=8ba149b405e244ca8c0ed00237b87c47; _fbp=fb.2.1744034337140.238777460431722269; _gcl_gs=2.1.k1$i1744659471$u21441960; _gcl_aw=GCL.1744659477.CjwKCAjw5PK_BhBBEiwAL7GTPUifFZxOpwFZrJmEJPNcYRJV-rVEfnfrJ78-otDzsyNcR2H6Tdvo_BoCXXcQAvD_BwE; AdoptConsent=N4Ig7gpgRgzglgFwgSQCIgFwgCYEMAsAZgKwAcAnAEwC0UUADAMzX6mH3W4TnGfeXcAjFADsEUqRAAaEADc48BAHsATsmyYQgwcSjF8AYyjV6lYoJa5shauQBsjctVIGIuiIUrlGRaSAQGhADKCCpwAHYA5pjhAK4ANvEySgAOCMjhACq4kTCYANogAFIAXgCyMAAaCgC2AGoAWn4GuACaqDVwUKgAnpl+QZX0AIIAHqQAEgCKANLxfgD6AOIwQQBWUCqEPegyABYlgkoAokE9MHtLfuGtSmCMdpkA6pSCIAC6yWkA8rEI2bkCp8QAYlOEYBBwukNFgUjNjrIAI55GSg8GQhB1CAqeBgzB2GSxFJ4JDYYYITSUUy8ej4aiCfCZQTkDCMUgYegiAB0xHo9CaAF8gA; _ga_LE22E2DJJ4=GS1.1.1744659477.2.0.1744660016.21.0.0; _ga_1HGH72T9S7=GS1.1.1744659482.2.1.1744660018.60.0.0; username=anVsaWFuby50YXZhcmVz|1744923051|8603bef0947be98fc92a0d0e6f35c15665d85870'}
-
 session = requests.Session()
 resposta = session.post(login_page, data=dados_login, verify=False)
 
@@ -94,7 +92,7 @@ def get_relatorio(x,y):
 
     if num_relatorio != 1334:
 
-        response = requests.get(relatorio, headers=headers, cookies=cookies, params=y, verify=False)
+        response = session.get(relatorio, headers=headers, params=y, verify=False)
 
         while response.status_code == 502:
             
@@ -102,12 +100,12 @@ def get_relatorio(x,y):
 
             time.sleep(5)
 
-            response = requests.get(relatorio, headers=headers, cookies=cookies, params=y, verify=False)
+            response = session.get(relatorio, headers=headers, params=y, verify=False)
         
     else:
 
-            response_pt1 = requests.get(relatorio, headers=headers, cookies=cookies, params=params_1334_pt1, verify=False)
-            response_pt2 = requests.get(relatorio, headers=headers, cookies=cookies, params=params_1334_pt2, verify=False)
+            response_pt1 = session.get(relatorio, headers=headers, params=params_1334_pt1, verify=False)
+            response_pt2 = session.get(relatorio, headers=headers, params=params_1334_pt2, verify=False)
 
             while response_pt1.status_code == 502 or response_pt2.status_code == 502 :
 
@@ -115,8 +113,8 @@ def get_relatorio(x,y):
 
                 time.sleep(5)
 
-                response_pt1 = requests.get(relatorio, headers=headers, cookies=cookies, params=params_1334_pt1, verify=False)
-                response_pt2 = requests.get(relatorio, headers=headers, cookies=cookies, params=params_1334_pt2, verify=False)
+                response_pt1 = session.get(relatorio, headers=headers, params=params_1334_pt1, verify=False)
+                response_pt2 = session.get(relatorio, headers=headers, params=params_1334_pt2, verify=False)
         
             merged_content = response_pt1.content + response_pt2.content[67:]
 
