@@ -70,7 +70,7 @@ def enviar_qbc_troca_665():
             assunto = f'{titulo}'
             
             corpo = f"""
-            <p>Boa dia/tarde,</p>
+            <p>Bom dia/tarde,</p>
 
             <p>Segue abaixo os lançamentos indevidos realizados na <strong>agenda 665</strong> no <strong>dia {ontem.strftime('%d/%m')}</strong> na Loja <strong>{loja}</strong>.</p>
 

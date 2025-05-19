@@ -64,7 +64,7 @@ def enviar_sacolas():
             if quantidade == 0:
 
                 corpo = f"""
-                <p>Boa dia/tarde,</p>
+                <p>Bom dia/tarde,</p>
 
                 <p>Após análise, verificamos que a loja citada (Loja <strong>{loja}</strong>) <strong>não realizou as baixas de sacolas</strong> na agenda <strong>656</strong>, no(s) dia(s) <strong>{tal_dia}</strong>.</p>
 
@@ -76,7 +76,7 @@ def enviar_sacolas():
             elif 0 < quantidade < 500:
 
                 corpo = f"""
-                <p>Boa tarde,</p>
+                <p>Bom dia/tarde,</p>
 
                 <p>Após análise, verificamos que a loja citada (Loja <strong>{loja}</strong>) baixou apenas <strong><font size="4">{agd_x['QUANTIDADE'].values[0]} unidade(s)</font></strong> de sacolas na agenda <strong>656</strong>, no(s) dia(s) <strong>{tal_dia}</strong>.</p>
 

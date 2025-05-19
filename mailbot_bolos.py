@@ -62,7 +62,7 @@ def enviar_bolos():
             if quantidade == 0:
 
                 corpo = f"""
-                <p>Boa dia/tarde,</p>
+                <p>Bom dia/tarde,</p>
                 <p>Após análise, verificamos que a loja citada (Loja <strong>{loja}</strong>) <strong>não realizou as baixas dos bolos</strong> na agenda <strong>151</strong> no(s) dia(s) <strong>{tal_dia}</strong>.</p>
                 <p><strong>Favor verificar de forma urgente</strong>, o <strong>recomendado</strong> e realizar as <strong>baixas todos os dias</strong>, já que todos os dias são utilizados nos "cafés" da loja.</p>
                 <p>Em caso de dúvidas, sinalizar <a href="mailto:central.cbm@bistek.com.br" target="_blank">@central.cbm</a>.</p>

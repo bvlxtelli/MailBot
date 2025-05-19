@@ -104,7 +104,7 @@ def enviar_sem_venda():
     titulo = f"SUSPEITO - SEM VENDA - LOJA {loja}"
 
     assunto = f'(URGENTE) {titulo}'
-    corpo = f"Boa dia/tarde,\n\nSegue em anexo suspeito de produtos que estão há mais de 30 dias sem venda na loja.\n\nEsse suspeito passa a ser semanal, ou seja, caso não seja feito irá acumular para a semana seguinte."
+    corpo = f"Bom dia/tarde,\n\nSegue em anexo suspeito de produtos que estão há mais de {x_dias} dias sem venda na loja.\n\nEsse suspeito passa a ser semanal, ou seja, caso não seja feito irá acumular para a semana seguinte."
 
     print(f"Gerando PDF para loja {loja}...")
     

@@ -131,7 +131,7 @@ def enviar_pereciveis():
             assunto = f'{titulo}'
 
             corpo = f"""
-            <p>Boa dia/tarde,</p>
+            <p>Bom dia/tarde,</p>
 
             <p>Segue abaixo os perecíveis que estão pendentes na loja <strong>{loja}</strong>.</p>
 

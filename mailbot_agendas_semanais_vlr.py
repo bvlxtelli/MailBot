@@ -67,7 +67,7 @@ def enviar_agendas_por_valor():
                 if qtd_semana < (qtd_media * 0.85) and qtd_media != 0:
 
                     corpo = f"""
-                    Boa dia/tarde,
+                    Bom dia/tarde,
                     <p>Após análise, verificamos que a loja citada (Loja <strong>{loja}</strong>) está com as baixas na agenda <strong><font size="4">{agenda} - {nome_agenda}</font></strong> <strong><font size="4" color="blue">ABAIXO</font> da média da loja</strong>.</p>
                     <p>A <strong>média diária</strong> é de <strong><font size="4">R$ {round(qtd_media)}</font></strong>, e foram baixadas(os), <strong>nos últimos 7 dias</strong>, <strong>em média</strong> <strong><font size="4" color="red">R$ {round(qtd_semana)}</font></strong> por dia. Totalizando <strong><font size="4">R$ {round((qtd_semana) * 7)}</font></strong>.</p>
                     <p><strong>Favor verificar de forma urgente</strong>, o <strong>recomendado</strong> é realizar as <strong>baixas de forma constante</strong> para evitar quebras e/ou disperdícios.</p>

@@ -110,7 +110,7 @@ def enviar_maiores_quebras():
     periodo = f'{anteont} À {ont}' if dia_da_semana != 'Segunda' else f'{sex} À {ont}'
 
     assunto = f"{titulo} - {periodo}"
-    corpo = f"""<p>Bom dia!</p>
+    corpo = f"""<p>Bom dia/tarde,</p>
     
     <p>Segue relatório citado em anexo (Entregar para o Sr. Marinho).</p>
     

@@ -231,7 +231,7 @@ def enviar_vencidos():
     corpo = f"""
     <div>
 
-    Bom dia,
+    Bom dia/tarde,
     <br>
     <br>
     Segue em anexo:

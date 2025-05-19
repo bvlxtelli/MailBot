@@ -106,7 +106,7 @@ def enviar_suspeitos_pendentes():
         emails = destinatario_var[loja]
         titulo_email = f"{titulo} - LOJA {loja}"
         assunto = f"(URGENTE) {titulo_email}"
-        corpo = f"Boa dia/tarde,\n\nSegue em anexo relatório de suspeitos que ainda <strong>não foram realizados</strong>."
+        corpo = f"Bom dia/tarde,\n\nSegue em anexo relatório de suspeitos que ainda <strong>não foram realizados</strong>."
 
         print(f"[ {pd.Timestamp.now()} ] Gerando PDF para loja {loja}...")
         pdf_buffer = gerar_pdf_lj_suspeitos(loja, dados)
