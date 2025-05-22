@@ -62,6 +62,15 @@ params_40 = {
     'paginado':'false'
 }
 
+params_1444 = {
+    'condicao_12686': {ontem.strftime('%d/%m/%Y')},
+    'condicao_12687': {ontem.strftime('%d/%m/%Y')},
+    'condicao_12656': '',
+    'condicao_12657': '',
+    'condicao_12753': '',
+    'paginado':'false'
+}
+
 def montar_parametros(y):
 
     params = [('condicao_11936', x) for x in y]
