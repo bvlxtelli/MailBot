@@ -15,3 +15,37 @@ def carregar_relatorio(x):
     
     except UnicodeDecodeError:
         return pd.read_csv(REL_PATHS[x], delimiter=';', encoding='latin1')
+    
+def string_repair(x, y):
+    for z in y:
+        x[z] = x[z].astype('string').str.strip()
+    return x
+
+def float_repair(x,y):
+    
+    for z in y:
+
+        x[z] = x[z].str.replace('[.]','', regex=True)
+        x[z] = x[z].str.replace('[,]','.', regex=True).astype('float64')
+
+    return x
+
+def strip_repair(x,y):
+
+    for z in y:
+
+        x[z] = x[z].astype(str).str.strip()
+
+    return x
+
+def date_repair(x, y):
+    for z in y:
+        x[z] = pd.to_datetime(x[z], format='mixed', dayfirst=True)
+        x[z] = x[z].dt.strftime('%d-%m-%Y')
+        x[z] = pd.to_datetime(x[z], format='%d-%m-%Y', dayfirst=True)
+    return x
+
+def int_repair(x, y):
+    for z in y:
+        x[z] = x[z].astype('int64')
+    return x
