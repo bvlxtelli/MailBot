@@ -2,10 +2,7 @@ from .my_vars import *
 
 titulo = "Paths"
 
-try:
-    BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
-except NameError:
-    BASE_DIR = os.path.abspath(os.path.join(os.getcwd(), ".."))
+BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", "# Painel"))
 
 PATHS = {
     "root": os.path.join(BASE_DIR),

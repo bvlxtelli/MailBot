@@ -20,7 +20,6 @@ import requests
 import urllib3
 import pandas as pd
 import chardet
-from my_lib.paths import *
 
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
@@ -98,18 +97,3 @@ planilhas_extras = [
     "secoes",
     "filiais"
 ]
-
-def carregar_relatorio(x):
-
-    try:
-        with open(REL_PATHS[x], 'rb') as f:
-            rawdata = f.read(10000)
-            result = chardet.detect(rawdata)
-            encoding = result['encoding']
-
-            if encoding is None or encoding.lower() == 'ascii':
-                encoding = 'utf-8'
-        return pd.read_csv(REL_PATHS[x], delimiter=';', encoding=encoding)
-    
-    except UnicodeDecodeError:
-        return pd.read_csv(REL_PATHS[x], delimiter=';', encoding='latin1')
