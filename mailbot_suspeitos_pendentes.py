@@ -12,11 +12,10 @@ titulo = 'SUSPEITOS PENDENTES'
 dtmin = pd.to_datetime('01/01/1990', format='%d/%m/%Y', dayfirst=True)
 dias = timedelta(days=2)
 dtct = hoje - dias
-py_csv_f = "C:\\Users\\Usuario\\Documents\\Python\\CSV\\"
 
 def carregar_dados(a,b):
 
-    bdsus = pd.read_csv(f"{py_csv_f}db suspeitos.csv", delimiter=';', encoding='ISO-8859-1', dtype={'FILIAL': 'int64', 'CODIGO': 'int64'})
+    bdsus = carregar_relatorio("db suspeitos")
     bdinv = a
     bdcg = b
     
