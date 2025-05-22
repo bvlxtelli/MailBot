@@ -39,6 +39,8 @@ def carregar_dados(a,b):
         np.where((bdg['DATA_CG'] > dtmin) & (~bdg['DPTO'].isna()), 'INV', 'NAO INV')
     )
 
+    bdg = bdg[(bdg['DATA'] < ontem)]
+
     bdg = bdg.sort_values(by=['DPTO', 'SECAO', 'DESCRICAO'], ascending=True)
     return bdg
 
