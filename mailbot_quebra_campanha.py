@@ -35,7 +35,7 @@ def enviar_quebra_campanha():
 
     enviar_email_com_tabela(
         inventarios_campanha(),
-        teste_com_digito,
+        inventario_com_digito,
         "DIVERGÊNCIAS DE INV. - CAMPANHA",
         """<div>Bom dia/tarde,
         <br>
