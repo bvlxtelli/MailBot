@@ -3,53 +3,34 @@ from mailbot import *
 
 def criar_pereciveis():
 
-    bdcrono = pd.read_csv(f"{py_csv_f}cronograma.csv", delimiter=';', encoding='ISO-8859-1', dtype={'FILIAL':'int64','CODIGO':'str','SECAO':'str'})
-    bdcrono['DATA'] = pd.to_datetime(bdcrono['DATA'], format='%d/%m/%Y', dayfirst=True)
-
-    bdsecoes = pd.read_csv(f"{py_csv_f}secoes.csv", delimiter=';', encoding='ISO-8859-1', dtype={'CODIGO_SECAO':'str','CODIGO_DPTO':'str'})
+    bdcrono = repair_things(df=carregar_relatorio("cronograma"), string=['SECAO'], date=['DATA'])
+    bdsecoes = repair_things(df=carregar_relatorio("secoes"), string=['CODIGO_SECAO', 'DESCRICAO_SECAO', 'CODIGO_DPTO', 'DESCRICAO_DPTO','Qtd. Produtos'])
     bdsecoes.columns = ['SECAO','DESCRICAO_SECAO','DPTO','DESCRICAO_DPTO','Qtd. Produtos']
-    bdsecoes['DESCRICAO_SECAO'] = bdsecoes['DESCRICAO_SECAO'].str.strip()
-    bdsecoes['DESCRICAO_DPTO'] = bdsecoes['DESCRICAO_DPTO'].str.strip()
-
-    bdperec = pd.read_csv(f"{py_csv_f}pereciveis.csv", delimiter=';', encoding='ISO-8859-1',dtype={'SECAO':'str'})
-
+    bdperec = repair_things(carregar_relatorio("pereciveis"), string=['PERECIVEIS', 'SECAO'])
     bdsecoes = bdsecoes.merge(bdperec, on='SECAO', how='left').fillna('-')
-
-    inventarios = baixar_relatorio(1334)
-    congelados = baixar_relatorio(1416)
-
-    inventarios['DPTO'] = inventarios['DPTO'].str.strip()
-    inventarios['DATA_ULT_INV'] = pd.to_datetime(inventarios['DATA_ULT_INV'], format='mixed', dayfirst=True).dt.strftime('%d-%m-%Y')
-    inventarios['DATA_ULT_INV'] = pd.to_datetime(inventarios['DATA_ULT_INV'], format='mixed', dayfirst=True)
-
+    inventarios = repair_things(df=carregar_relatorio("relatorio_1334"), string=['CODIGO', 'DESCRICAO', 'DPTO', 'SECAO','DIAS_ULT_INV'], date=['DATA_ULT_INV'], int=['FILIAL'], float=['SALDO'])
+    congelados = repair_things(df=carregar_relatorio("relatorio_1416"), string=['NUM_INV', 'DESCRICAO_INV', 'DESC_FILIAL', 'RMS','DESCRICAO', 'SECAO', 'DESC_SECAO'], date=['DATA'], int=['FILIAL'])
     congelados.columns = ['NUM_INV','DESCRICAO_INV','DATA_CG','FILIAL','DESC_FILIAL','CODIGO','DESCRICAO','SECAO','DESC_SECAO']
     congelados_filtro = ['DATA_CG','FILIAL','CODIGO']
     congelados = congelados[congelados_filtro]
-    congelados['CODIGO'] = congelados['CODIGO'].astype(str)
-    congelados['DATA_CG'] = pd.to_datetime(congelados['DATA_CG'], format='mixed', dayfirst=True).dt.strftime('%d-%m-%Y')
-    congelados['DATA_CG'] = pd.to_datetime(congelados['DATA_CG'], format='mixed', dayfirst=True)
 
     crono = bdcrono.merge(bdsecoes, on='SECAO', how='left').fillna('-')
 
     df_base_repeated = pd.concat([filiais_com_digito] * len(crono), ignore_index=True)
     df_ref_repeated = crono.loc[crono.index.repeat(len(filiais_com_digito))].reset_index(drop=True)
-
     df_final = pd.concat([df_ref_repeated, df_base_repeated], axis=1)
     df_final = df_final.sort_values(by='FILIAL',ascending=True)
     df_final = df_final.dropna()
     df_final['SECAO'] = df_final['SECAO'].astype(str) + " - " + df_final['DESCRICAO_SECAO']
     df_final['DPTO'] = df_final['DPTO'].astype(str) + " - " + df_final['DESCRICAO_DPTO']
-
     df_final_filtro = ['DATA','DPTO','SECAO','FILIAL','PERECIVEIS']
     df_final = df_final[df_final_filtro]
 
     cronograma = df_final.merge(inventarios, on=['DPTO','SECAO','FILIAL'], how='left').dropna()
-    cronograma['CODIGO'] = cronograma['CODIGO'].astype(str)
     cronograma = cronograma.merge(congelados, on=['CODIGO','FILIAL'], how='left')
-
     cronograma['DATA'] = cronograma['DATA'].fillna('01/01/1990')
     cronograma['DATA_CG'] = cronograma['DATA_CG'].fillna('01/01/1990')
-
+    cronograma = repair_things(df=cronograma, date=['DATA','DATA_ULT_INV','DATA_CG'], string=['DPTO','SECAO','PERECIVEIS','CODIGO','DESCRICAO','SALDO','DIAS_ULT_INV'], int=['FILIAL'])
     cronograma.insert(
         loc = 11,
         column = 'SITUACAO',
