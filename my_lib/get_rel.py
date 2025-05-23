@@ -1,5 +1,7 @@
 from .my_vars import *
 
+titulo = "Relatórios"
+
 import urllib3
 
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
@@ -162,3 +164,5 @@ def baixar_relatorio(x):
     print(f"[ {pd.Timestamp.now()} ] Relatório {x} baixado e armazenado em cache ✅")
 
     return y
+
+print(f"[{pd.Timestamp.now()}] Módulo {titulo} carregado")
