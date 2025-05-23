@@ -14,6 +14,8 @@ from mailbot_sem_venda import enviar_sem_venda
 from mailbot_suspeitos_pendentes import enviar_suspeitos_pendentes
 from mailbot_vencidos import enviar_vencidos
 from mailbot_qbc_troca_665 import enviar_qbc_troca_665
+from mailbot_quebra_campanha import enviar_quebra_campanha
+from mailbot_divergencias_altas import enviar_divergencias_altas
 
 if dia_da_semana == 'Segunda':
 
@@ -24,13 +26,18 @@ if dia_da_semana == 'Segunda':
     enviar_bolos()
     enviar_qbc_troca_665()
 
+    enviar_quebra_campanha()
     enviar_sem_venda()
+    enviar_divergencias_altas()
 
 if dia_da_semana == 'Terça':
 
     enviar_sacolas()
     enviar_bolos()
     enviar_qbc_troca_665()
+
+    enviar_quebra_campanha()
+    enviar_divergencias_altas()
 
 if dia_da_semana == 'Quarta':
 
@@ -43,13 +50,18 @@ if dia_da_semana == 'Quarta':
     enviar_agendas()
     enviar_agendas_por_valor()
 
+    enviar_quebra_campanha()
+    enviar_divergencias_altas()
+
 if dia_da_semana == 'Quinta':
 
     enviar_sacolas()
     enviar_bolos()
     enviar_qbc_troca_665()
 
+    enviar_quebra_campanha()
     enviar_suspeitos_pendentes()
+    enviar_divergencias_altas()
 
 if dia_da_semana == 'Sexta':
 
@@ -59,6 +71,8 @@ if dia_da_semana == 'Sexta':
     enviar_bolos()
     enviar_qbc_troca_665()
 
+    enviar_quebra_campanha()
+    enviar_divergencias_altas()
     enviar_pereciveis()
 
 
