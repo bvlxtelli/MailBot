@@ -33,4 +33,4 @@ for relatorio in relatorios:
 for extra in planilhas_extras:
     REL_PATHS[extra] = os.path.join(BASE_DIR, PATHS["database/csv"], f"{extra}.csv")
 
-print(f">> {titulo} carregado")
+print(f"[{pd.Timestamp.now()}] Módulo {titulo} carregado")
