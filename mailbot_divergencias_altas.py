@@ -22,7 +22,7 @@ def inventarios_altos():
         x = x[
             (
             (x['DATA'].isin([sexta, anteontem, ontem])) &
-            (x['DIVERG_PERC'] > 1.75) &
+            ((x['DIVERG_PERC'] > 1.80) | (x['DIVERG_PERC'] < 0.80)) &
             (x['TOTAL_SIST'] > 500)
             )
             |
@@ -50,7 +50,7 @@ def enviar_divergencias_altas():
 
     enviar_email_com_tabela(
         inventarios_altos(),
-        teste_com_digito,
+        inventario_com_digito,
         "SUSPEITO - DIVERGÊNCIAS DE INV. ALTAS",
         """
         <div>Bom dia/tarde,
