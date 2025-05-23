@@ -16,6 +16,8 @@ def carregar_relatorio(x):
     except UnicodeDecodeError:
         return pd.read_csv(REL_PATHS[x], delimiter=';', encoding='latin1')
     
+# --- Repair ---
+    
 def string_repair(x, y):
     for z in y:
         x[z] = x[z].astype('string').str.strip()
@@ -49,3 +51,22 @@ def int_repair(x, y):
     for z in y:
         x[z] = x[z].astype('int64')
     return x
+
+def repair_things(df=None, string=None, strip=None, float=None, date=None, int=None):
+
+    if string is not None:
+        string_repair(df, string)
+    
+    if strip is not None:
+        strip_repair(df, strip)
+    
+    if float is not None:
+        float_repair(df, float)
+    
+    if date is not None:
+        date_repair(df, date)
+    
+    if int is not None:
+        int_repair(df, int)
+
+    return df
