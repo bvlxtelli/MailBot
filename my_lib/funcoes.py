@@ -1,6 +1,8 @@
 from .my_vars import *
 from .paths import *
 
+titulo = "Funções"
+
 def carregar_relatorio(x):
 
     try:
@@ -70,3 +72,5 @@ def repair_things(df=None, string=None, strip=None, float=None, date=None, int=N
         int_repair(df, int)
 
     return df
+
+print(f"[{pd.Timestamp.now()}] Módulo {titulo} carregado")
