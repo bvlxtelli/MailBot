@@ -2,7 +2,7 @@ from my_lib import *
 
 def inventarios():
 
-    a = baixar_relatorio(1444)
+    a = baixar_relatorio(1444).copy()
     a = string_repair(a, a.columns)
     a = float_repair(a, ['QTD_SIS', 'QTD_DIG', 'DIVERG', 'PENDENCIA', 'CUSTO', 'TOTAL_SIST', 'TOTAL_DIG', 'QTD_ULT_INV'])
     a = date_repair(a, ['DATA'])
