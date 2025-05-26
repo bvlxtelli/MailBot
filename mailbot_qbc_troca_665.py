@@ -60,9 +60,7 @@ def agendas(x,y):
 
     a = a[a['AGENDA'] == 665]
 
-    a['DT_AGENDA'] = pd.to_datetime(a['DT_AGENDA'], format='mixed', dayfirst=True)
-    a['DT_AGENDA'] = a['DT_AGENDA'].dt.strftime('%d-%m-%Y')
-    a['DT_AGENDA'] = pd.to_datetime(a['DT_AGENDA'], format='%d-%m-%Y', dayfirst=True)
+    a = date_repair(a, ['DT_AGENDA'])
 
     for col in ['VLR_TOTAL','VLR_NOTA','VL_CUSTO_NF','VL_CUSTO_TABELA','QUANTIDADE']:
 
