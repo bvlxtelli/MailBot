@@ -197,7 +197,8 @@ def enviar_vencidos():
     anexos = gerar_pdfs_vencidos()
 
     if anexos:
-        destinatario = ",".join(['jocelene.paes@bistek.com.br','uzias.souza@bistek.com.br','central.cbm@bistek.com.br'])#['matheus.moura@bistek.com.br'])
+        
+        destinatario = ",".join(['jocelene.paes@bistek.com.br','uzias.souza@bistek.com.br','central.cbm@bistek.com.br'])#['matheus.moura@bistek.com.br'])#['matheus.moura@bistek.com.br'])#
 
         print(f"[ {pd.Timestamp.now()} ] Enviando e-mail para {destinatario}...")
 
