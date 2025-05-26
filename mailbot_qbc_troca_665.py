@@ -101,6 +101,16 @@ def enviar_qbc_troca_665():
     a = agendas(baixar_relatorio(274),baixar_relatorio(40))
 
     for loja, emails in ccp_sem_digito.items():
+
+        if dia_da_semana == 'Segunda':
+    
+            titulo = f"TROCA LANÇADA NA QUEBRA - AGENDA 665 - LOJA {loja} - {sexta.strftime('%d')}, {anteontem.strftime('%d')} E {ontem.strftime('%d/%m')}"
+            tal_dia = f'{sexta.strftime('%d')}, {anteontem.strftime('%d')} e {ontem.strftime('%d/%m/%Y')}'
+        
+        else:
+
+            f"TROCA LANÇADA NA QUEBRA - AGENDA 665 - LOJA {loja} - {ontem.strftime('%d/%m')}"
+            tal_dia = ontem.strftime('%d/%m/%Y')
         
         print(f"[ {pd.Timestamp.now()} ] Gerando dados para loja {loja}...")
 
@@ -125,7 +135,7 @@ def enviar_qbc_troca_665():
             corpo = f"""
             <p>Bom dia/tarde,</p>
 
-            <p>Segue abaixo os lançamentos indevidos realizados na <strong>agenda 665</strong> no <strong>dia {ontem.strftime('%d/%m')}</strong> na Loja <strong>{loja}</strong>.</p>
+            <p>Segue abaixo os lançamentos indevidos realizados na <strong>agenda 665</strong> no(s) <strong>dia(s) {tal_dia}</strong> na Loja <strong>{loja}</strong>.</p>
 
             {tabela_html}
 
