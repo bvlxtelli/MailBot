@@ -17,8 +17,6 @@ def quebra_conhecida():
     print(f"[ {pd.Timestamp.now()} ] Relatório criado")
 
     x = x[
-        #(x['DATA_FATURAMENTO'] >= segunda_passada) &
-        #(x['DATA_FATURAMENTO'] < hoje) &
         (x['AG'] == 531)
         ]
 
