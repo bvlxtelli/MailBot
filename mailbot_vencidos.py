@@ -12,71 +12,42 @@ from reportlab.platypus import SimpleDocTemplate, Table, TableStyle # type: igno
 from reportlab.lib import colors # type: ignore
 from my_lib import *
 from mailbot import *
+from modules import quebra_conhecida
 
 print(f"[ {pd.Timestamp.now()} ] Iniciando aplicação...")
 print(f"[ {pd.Timestamp.now()} ] Buscando relatório no Thincake...")
 
-def criar_vencidos():
+def criar_vencidos(depto=None, loja=False):
 
-    x = baixar_relatorio(1262).copy()
-
-    print(f"[ {pd.Timestamp.now()} ] Relatório baixado, filtrando o mesmo...")
-
-    x = date_repair(x, ['DATA_FATURAMENTO', 'DATA_NOTIFICACAO'])
-
-    for col in ['CUSTO', 'CUSTO_TOTAL', 'QTD']:
-        if not pd.api.types.is_float_dtype(x[col]):
-            x[col] = x[col].astype(str).str.replace('[.]','', regex=True)
-            x[col] = x[col].str.replace('[,]','.', regex=True).astype('float64')
-
-    x['PRODUTO'] = x['PRODUTO'].str.strip()
-
-    print(f"[ {pd.Timestamp.now()} ] Relatório criado")
-
-    titulo = 'VENCIDOS'
+    x = quebra_conhecida()
 
     x = x[
         (x['DATA_FATURAMENTO'] >= segunda_passada) &
         (x['DATA_FATURAMENTO'] < hoje) &
-        (x['AG'] == 531) &
         ((x['MOTIVO'].str.contains('VENC.', case=False, na=False)) == True)
         ]
 
-    print(f"[ {pd.Timestamp.now()} ] Relatório filtrado")
+    if depto is not None:
 
-    return x
+        x = x[(x['NDEPTO'].str.contains(depto, case=False, na=False))]
+    
+    if loja is True:
 
-def criar_vencidos_rede_tudo():
+        x['SOMA_QTD'] = x.groupby(['FILIAL','COD_PROD'])['QTD'].transform('sum').astype('float64')
+        x['SOMA_R$'] = x.groupby(['FILIAL','COD_PROD'])['CUSTO_TOTAL'].transform('sum').astype('float64')
+    
+    else:
 
-    x = criar_vencidos()
+        x['SOMA_QTD'] = x.groupby(['COD_PROD'])['QTD'].transform('sum').astype('float64')
+        x['SOMA_R$'] = x.groupby(['COD_PROD'])['CUSTO_TOTAL'].transform('sum').astype('float64')
 
-    x['SOMA_QTD'] = x.groupby(['COD_PROD'])['QTD'].transform('sum').astype('float64')
-    x['SOMA_R$'] = x.groupby(['COD_PROD'])['CUSTO_TOTAL'].transform('sum').astype('float64')
+    if loja is True:
 
-    filtro = ['COD_PROD','PRODUTO','SOMA_QTD','SOMA_R$']
+        filtro = ['FILIAL','COD_PROD','PRODUTO','SOMA_QTD','SOMA_R$']
+    
+    else:
 
-    x = x[filtro].drop_duplicates() \
-        .sort_values(
-            by=['SOMA_R$'],
-            ascending=[False]
-        )
-
-    x.columns = ['CÓDIGO','PRODUTO','QTD','R$']
-
-    print(f"[ {pd.Timestamp.now()} ] Relatório criado: VENCIDOS - REDE")
-
-    return x
-
-def criar_vencidos_rede(y):
-
-    x = criar_vencidos()
-
-    x = x[(x['NDEPTO'].str.contains(y, case=False, na=False))]
-
-    x['SOMA_QTD'] = x.groupby(['COD_PROD'])['QTD'].transform('sum').astype('float64')
-    x['SOMA_R$'] = x.groupby(['COD_PROD'])['CUSTO_TOTAL'].transform('sum').astype('float64')
-
-    filtro = ['COD_PROD','PRODUTO','SOMA_QTD','SOMA_R$']
+        filtro = ['COD_PROD','PRODUTO','SOMA_QTD','SOMA_R$']
 
     x = x[filtro].drop_duplicates() \
         .sort_values(
@@ -84,67 +55,42 @@ def criar_vencidos_rede(y):
             ascending=[False]
         )
 
-    x.columns = ['CÓDIGO','PRODUTO','QTD','R$']
+    if loja is True:
 
-    print(f"[ {pd.Timestamp.now()} ] Relatório criado: VENCIDOS - REDE - {y}")
+        x = x[(x['SOMA_R$'] > 99.99)]
+        x.columns = ['FILIAL','CÓDIGO','PRODUTO','QTD','R$']
+    
+    else:
 
-    return x
+        x.columns = ['CÓDIGO','PRODUTO','QTD','R$']
 
-def criar_vencidos_lojas_tudo():
+    if loja is True and depto is not None:
 
-    x = criar_vencidos()
+        print(f"[ {pd.Timestamp.now()} ] Relatório criado: VENCIDOS - LOJAS - {depto}")
+    
+    elif loja is True and depto is None:
 
-    x['SOMA_QTD'] = x.groupby(['FILIAL','COD_PROD'])['QTD'].transform('sum').astype('float64')
-    x['SOMA_R$'] = x.groupby(['FILIAL','COD_PROD'])['CUSTO_TOTAL'].transform('sum').astype('float64')
+        print(f"[ {pd.Timestamp.now()} ] Relatório criado: VENCIDOS - LOJAS")
+    
+    elif loja is False and depto is not None:
 
-    filtro = ['FILIAL','COD_PROD','PRODUTO','SOMA_QTD','SOMA_R$']
+        print(f"[ {pd.Timestamp.now()} ] Relatório criado: VENCIDOS - REDE - {depto}")
+    
+    elif loja is False and depto is None:
 
-    x = x[filtro].drop_duplicates() \
-        .sort_values(
-            by=['SOMA_R$'],
-            ascending=[False]
-        )
-
-    x = x[(x['SOMA_R$'] > 99.99)]
-    x.columns = ['FILIAL','CÓDIGO','PRODUTO','QTD','R$']
-
-    print(f"[ {pd.Timestamp.now()} ] Relatório criado: VENCIDOS - LOJAS")
-
-    return x
-
-def criar_vencidos_lojas(y):
-
-    x = criar_vencidos()
-
-    x = x[(x['NDEPTO'].str.contains(y, case=False, na=False))]
-
-    x['SOMA_QTD'] = x.groupby(['FILIAL','COD_PROD'])['QTD'].transform('sum').astype('float64')
-    x['SOMA_R$'] = x.groupby(['FILIAL','COD_PROD'])['CUSTO_TOTAL'].transform('sum').astype('float64')
-
-    filtro = ['FILIAL','COD_PROD','PRODUTO','SOMA_QTD','SOMA_R$']
-
-    x = x[filtro].drop_duplicates() \
-        .sort_values(
-            by=['SOMA_R$'],
-            ascending=[False]
-        )
-
-    x = x[(x['SOMA_R$'] > 99.99)]
-    x.columns = ['FILIAL','CÓDIGO','PRODUTO','QTD','R$']
-
-    print(f"[ {pd.Timestamp.now()} ] Relatório criado: VENCIDOS - LOJAS - {y}")
+        print(f"[ {pd.Timestamp.now()} ] Relatório criado: VENCIDOS - REDE")
 
     return x
 
 def gerar_relatorios():
 
-    vencidos_rede_tudo = criar_vencidos_rede_tudo()
-    vencidos_rede_acougue_e_frios = criar_vencidos_rede('ACOUGUE|FRIOS')
-    vencidos_rede_sem_pereciveis = criar_vencidos_rede('MERC')
+    vencidos_rede_tudo = criar_vencidos(loja=False)
+    vencidos_rede_acougue_e_frios = criar_vencidos(depto='ACOUGUE|FRIOS', loja=False)
+    vencidos_rede_sem_pereciveis = criar_vencidos(depto='MERC', loja=False)
 
-    vencidos_lojas_tudo = criar_vencidos_lojas_tudo()
-    vencidos_lojas_acougue_e_frios = criar_vencidos_lojas('ACOUGUE|FRIOS')
-    vencidos_lojas_sem_pereciveis = criar_vencidos_lojas('MERC')
+    vencidos_lojas_tudo = criar_vencidos(loja=True)
+    vencidos_lojas_acougue_e_frios = criar_vencidos(depto='ACOUGUE|FRIOS', loja=True)
+    vencidos_lojas_sem_pereciveis = criar_vencidos(depto='MERC', loja=True)
 
     relatorios = {
     'VENCIDOS - REDE': vencidos_rede_tudo,
@@ -251,7 +197,7 @@ def enviar_vencidos():
     anexos = gerar_pdfs_vencidos()
 
     if anexos:
-        destinatario = ",".join(['jocelene.paes@bistek.com.br','uzias.souza@bistek.com.br','central.cbm@bistek.com.br'])
+        destinatario = ",".join(['jocelene.paes@bistek.com.br','uzias.souza@bistek.com.br','central.cbm@bistek.com.br'])#['matheus.moura@bistek.com.br'])
 
         print(f"[ {pd.Timestamp.now()} ] Enviando e-mail para {destinatario}...")
 
