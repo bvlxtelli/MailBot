@@ -22,14 +22,12 @@ def criar_vencidos():
 
     print(f"[ {pd.Timestamp.now()} ] Relatório baixado, filtrando o mesmo...")
 
-    for col in ['DATA_FATURAMENTO', 'DATA_NOTIFICACAO']:
-        x[col] = pd.to_datetime(x[col], format='mixed', dayfirst=True)
-        x[col] = x[col].dt.strftime('%d-%m-%Y')
-        x[col] = pd.to_datetime(x[col], format='%d-%m-%Y', dayfirst=True)
+    x = date_repair(x, ['DATA_FATURAMENTO', 'DATA_NOTIFICACAO'])
 
     for col in ['CUSTO', 'CUSTO_TOTAL', 'QTD']:
-        x[col] = x[col].astype(str).str.replace('[.]','', regex=True)
-        x[col] = x[col].str.replace('[,]','.', regex=True).astype('float64')
+        if not pd.api.types.is_float_dtype(x[col]):
+            x[col] = x[col].astype(str).str.replace('[.]','', regex=True)
+            x[col] = x[col].str.replace('[,]','.', regex=True).astype('float64')
 
     x['PRODUTO'] = x['PRODUTO'].str.strip()
 
