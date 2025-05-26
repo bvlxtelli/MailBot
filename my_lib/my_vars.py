@@ -1,11 +1,8 @@
 from bokeh.plotting import figure
 from bokeh.models import ColumnDataSource
-from datetime import datetime
-from datetime import timedelta
-from matplotlib.backends.backend_pdf import PdfPages
-from matplotlib.colors import LinearSegmentedColormap, ListedColormap
-from urllib import parse
+import chardet
 import io
+from io import StringIO,BytesIO
 import matplotlib as mpl
 import matplotlib.pyplot as plt
 import numpy as np
@@ -13,13 +10,14 @@ import os
 import pandas as pd
 import panel as pn
 import re
+import requests
 import smtplib
 import time
-from io import StringIO
-import requests
 import urllib3
-import pandas as pd
-import chardet
+from datetime import datetime, timedelta
+from matplotlib.backends.backend_pdf import PdfPages
+from matplotlib.colors import LinearSegmentedColormap, ListedColormap
+from urllib import parse
 
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
