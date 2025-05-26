@@ -55,7 +55,7 @@ def enviar_divergencias_altas():
         """
         <div>Bom dia/tarde,
         <br><br>
-        Após análise, identificamos&nbsp;<b>divergências<font color="#ff0000"> altas</font></b>&nbsp;nos inventários da <b>abaixo&nbsp;</b>na data citada.&nbsp;<b>Favor verificar de forma&nbsp;<font color="#ff0000">urgente</font></b><font color="#ff0000">&nbsp;</font>e identificar se ocorreu algum erro de processo e/ou contagem.
+        Após análise, identificamos&nbsp;<b>divergências<font color="#ff0000"> altas</font></b>&nbsp;nos inventários <b>abaixo&nbsp;</b>na data citada.&nbsp;<b>Favor verificar de forma&nbsp;<font color="#ff0000">urgente</font></b><font color="#ff0000">&nbsp;</font>e identificar se ocorreu algum erro de processo e/ou contagem.
         </div>
         <br>
         """
