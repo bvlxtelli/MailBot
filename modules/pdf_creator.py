@@ -10,31 +10,35 @@ def gerar_pdf(base=None, loja=None, titulo=None):
     
         colunas = ['NOME_DPTO', 'NOME_SECAO', 'PRODUTO', 'DESCRICAO', 'LOJA']
         copia_do_relatorio = rel.copy()
-        copia_do_relatorio = copia_do_relatorio[copia_do_relatorio['LOJA'] == loja][colunas]
-        skus = rel['LOJA'].value_counts().get(loja, 0)
+        a = copia_do_relatorio[copia_do_relatorio['LOJA'] == loja][colunas].reset_index(drop=True)
+        skus = a['LOJA'].value_counts().get(loja, 0)
 
     if 'PENDENTES' in titulo:
 
         colunas = ['DPTO', 'SECAO', 'CODIGO', 'DESCRICAO', 'FILIAL']
         copia_do_relatorio = rel.copy()
-        copia_do_relatorio = copia_do_relatorio[(copia_do_relatorio['FILIAL'] == loja) & (copia_do_relatorio['SITUACAO'] == 'NAO INV')][colunas].drop_duplicates()
-        skus = rel['FILIAL'].value_counts().get(loja, 0)
+        a = copia_do_relatorio[
+            (copia_do_relatorio['FILIAL'] == loja) &
+            (copia_do_relatorio['SITUACAO'] == 'NAO INV')][colunas].drop_duplicates().reset_index(drop=True)
+        skus = len(a)
 
-    if 'QUEBRA' or 'VENCIDOS' in titulo:
+    #if 'QUEBRA' in titulo or 'VENCIDOS' in titulo:
 
-        'a'
+    #    'a'
 
-    if copia_do_relatorio.empty:
-        print(f"Nenhum dado para a loja {loja}.")
+    if a.empty:
+        print(f"[ {pd.Timestamp.now()} ] Nenhum dado para a loja {loja}.")
         return None
 
     contador_de_linhas = 0
     pdf_buffer = io.BytesIO()
 
     with PdfPages(pdf_buffer) as pdf:
+        
         while contador_de_linhas < skus:
-            
-            b = copia_do_relatorio.iloc[contador_de_linhas:(contador_de_linhas + 45)]
+
+            if 'SEM VENDA' in titulo or 'PENDENTES' in titulo:
+                b = a.iloc[contador_de_linhas:(contador_de_linhas + 45)]
 
             fig, ax = plt.subplots(figsize=(len(b.columns) * 1.5, 1))
             ax.axis('tight')
