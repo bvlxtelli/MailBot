@@ -1,22 +1,25 @@
-from bokeh.plotting import figure
 from bokeh.models import ColumnDataSource
+from bokeh.plotting import figure
 import chardet
+from datetime import datetime, timedelta
 import io
-from io import StringIO,BytesIO
 import matplotlib as mpl
+from matplotlib.backends.backend_pdf import PdfPages
+from matplotlib.colors import LinearSegmentedColormap, ListedColormap
 import matplotlib.pyplot as plt
 import numpy as np
 import os
 import pandas as pd
 import panel as pn
+import pdfkit
+from reportlab.lib import colorse
+from reportlab.lib.pagesizes import letter
+from reportlab.platypus import SimpleDocTemplate, Table, TableStyle
 import re
 import requests
 import smtplib
 import time
 import urllib3
-from datetime import datetime, timedelta
-from matplotlib.backends.backend_pdf import PdfPages
-from matplotlib.colors import LinearSegmentedColormap, ListedColormap
 from urllib import parse
 
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
