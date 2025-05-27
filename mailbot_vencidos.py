@@ -1,18 +1,6 @@
-import matplotlib.pyplot as plt # type: ignore
-import numpy as np # type: ignore
-import os # type: ignore
-import pandas as pd # type: ignore
-import smtplib # type: ignore
-from datetime import datetime # type: ignore
-from datetime import timedelta # type: ignore
-from matplotlib.backends.backend_pdf import PdfPages # type: ignore
-import pdfkit # type: ignore
-from reportlab.lib.pagesizes import letter # type: ignore
-from reportlab.platypus import SimpleDocTemplate, Table, TableStyle # type: ignore
-from reportlab.lib import colors # type: ignore
 from my_lib import *
 from mailbot import *
-from modules import quebra_conhecida
+from modules import quebra_conhecida, pdf_creator
 
 print(f"[ {pd.Timestamp.now()} ] Iniciando aplicação...")
 print(f"[ {pd.Timestamp.now()} ] Buscando relatório no Thincake...")
