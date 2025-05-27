@@ -1,13 +1,6 @@
-import matplotlib.pyplot as plt
-from matplotlib.backends.backend_pdf import PdfPages
-import pandas as pd
-import numpy as np
-import io
-from datetime import datetime, timedelta
 from my_lib import *
 from mailbot import *
-
-titulo = 'SUSPEITOS PENDENTES'
+from modules import gerar_pdf
 
 dtmin = pd.to_datetime('01/01/1990', format='%d/%m/%Y', dayfirst=True)
 dias = timedelta(days=2)
@@ -42,82 +35,30 @@ def carregar_dados(a,b):
     bdg = bdg[(bdg['DATA'] < ontem)]
 
     bdg = bdg.sort_values(by=['DPTO', 'SECAO', 'DESCRICAO'], ascending=True)
+
     return bdg
-
-
-def gerar_pdf_lj_suspeitos(loja, dados_filtrados):
-
-    colunas = ['DPTO', 'SECAO', 'CODIGO', 'DESCRICAO', 'FILIAL']
-    a = dados_filtrados[(dados_filtrados['FILIAL'] == loja) & (dados_filtrados['SITUACAO'] == 'NAO INV')][colunas].drop_duplicates()
-    
-    if a.empty:
-        print(f"[ {pd.Timestamp.now()} ] Nenhum dado para a loja {loja}.")
-        return None
-
-    skus = a['FILIAL'].value_counts().get(loja, 0)
-    contador_de_linhas = 0
-    pdf_buffer = io.BytesIO()
-
-    with PdfPages(pdf_buffer) as pdf:
-        while contador_de_linhas < skus:
-            b = a.iloc[contador_de_linhas:contador_de_linhas + 45]
-            fig, ax = plt.subplots(figsize=(len(b.columns) * 1.5, 1))
-            ax.axis('tight')
-            ax.axis('off')
-
-            table = ax.table(cellText=b.values, colLabels=b.columns, cellLoc='center', loc='center')
-            table.auto_set_font_size(False)
-            table.set_fontsize(10)
-            table.auto_set_column_width(col=list(range(len(b.columns))))
-
-            for i, cell in table._cells.items():
-                cell.set_edgecolor('lightgray')
-                if i[0] == 0:
-                    cell.set_facecolor("black")
-                    cell.set_text_props(weight="bold", color="white")
-                    cell.set_edgecolor("white")
-
-            for (row, col), cell in table.get_celld().items():
-                if col == 2 or col == 4:
-                    cell.set_text_props(weight="bold")
-
-            for (row, col), cell in table.get_celld().items():
-                if row > 0:
-                    cell.set_facecolor("0.95" if row % 2 == 0 else "white")
-
-            pdf.savefig(fig, bbox_inches="tight")
-            plt.close()
-            contador_de_linhas += 45
-
-    pdf_buffer.seek(0)
-    print(f"[ {pd.Timestamp.now()} ] PDF da Loja {loja} gerado em memória.")
-
-    return pdf_buffer
 
 def enviar_suspeitos_pendentes():
     
     service = login()
-    destinatario_var = inventario_com_digito
-    lojas = list(destinatario_var.keys())
 
-    dados = carregar_dados(baixar_relatorio(1334), baixar_relatorio(1416))
-
-    for loja in lojas:
+    for loja, emails in inventario_com_digito.items():
         
-        emails = destinatario_var[loja]
-        titulo_email = f"{titulo} - LOJA {loja}"
-        assunto = f"(URGENTE) {titulo_email}"
+        titulo = f"SUSPEITO - PENDENTES - LOJA {loja}"
+        assunto = f"(URGENTE) {titulo}"
         corpo = f"Bom dia/tarde,\n\nSegue em anexo relatório de suspeitos que ainda <strong>não foram realizados</strong>."
 
-        print(f"[ {pd.Timestamp.now()} ] Gerando PDF para loja {loja}...")
-        pdf_buffer = gerar_pdf_lj_suspeitos(loja, dados)
+        print(f"Gerando PDF para loja {loja}...")
+
+        dados = carregar_dados(baixar_relatorio(1334), baixar_relatorio(1416))
+        pdf_buffer = gerar_pdf(base=dados, loja=loja, titulo=titulo)
 
         if pdf_buffer:
 
-            nome_pdf = f"{titulo_email} - {datetime.now().strftime('%d-%m')}.pdf"
-            destinatario = ','.join(emails)
+            nome_pdf = f"{titulo} - {datetime.now().strftime('%d-%m')}.pdf"
+            destinatario = ','.join(['matheus.moura@bistek.com.br'])
 
-            print(f"[ {pd.Timestamp.now()} ] Enviando e-mail para {destinatario}...")
+            print(f"Enviando e-mail para {destinatario}...")
 
             enviar_email(
                 service,
@@ -131,8 +72,7 @@ def enviar_suspeitos_pendentes():
             )
 
         else:
-
-            print(f"[ {pd.Timestamp.now()} ] Nenhum dado para a loja {loja}. E-mail não enviado.")
+            print(f"Loja {loja} sem dados. E-mail não enviado.")
 
 if __name__ == "__main__":
     enviar_suspeitos_pendentes()
