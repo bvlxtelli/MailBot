@@ -1,8 +1,3 @@
-import matplotlib.pyplot as plt
-from matplotlib.backends.backend_pdf import PdfPages
-import pandas as pd
-import io
-from datetime import datetime, timedelta
 from my_lib import *
 from mailbot import *
 
