@@ -103,4 +103,4 @@ planilhas_extras = [
     "teste"
 ]
 
-print(f"[{pd.Timestamp.now()}] Módulo {titulo} carregado")
+print(f"[ {pd.Timestamp.now()} ] Módulo {titulo} carregado")

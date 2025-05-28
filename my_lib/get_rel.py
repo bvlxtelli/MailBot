@@ -165,4 +165,4 @@ def baixar_relatorio(x):
 
     return y
 
-print(f"[{pd.Timestamp.now()}] Módulo {titulo} carregado")
+print(f"[ {pd.Timestamp.now()} ] Módulo {titulo} carregado")

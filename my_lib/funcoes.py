@@ -73,4 +73,4 @@ def repair_things(df=None, string=None, strip=None, float=None, date=None, int=N
 
     return df
 
-print(f"[{pd.Timestamp.now()}] Módulo {titulo} carregado")
+print(f"[ {pd.Timestamp.now()} ] Módulo {titulo} carregado")
