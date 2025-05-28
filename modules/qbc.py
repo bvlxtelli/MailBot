@@ -6,13 +6,11 @@ def quebra_conhecida():
 
     print(f"[ {pd.Timestamp.now()} ] Relatório baixado, filtrando o mesmo...")
 
-    x = date_repair(x, ['DATA_FATURAMENTO', 'DATA_NOTIFICACAO'])
-    x = string_repair(x, ['PRODUTO'])
+    x = repair_things(x, date=['DATA_FATURAMENTO', 'DATA_NOTIFICACAO'], string=['PRODUTO'])
 
     for col in ['CUSTO', 'CUSTO_TOTAL', 'QTD']:
         if not pd.api.types.is_float_dtype(x[col]):
-            x[col] = x[col].astype(str).str.replace('[.]','', regex=True)
-            x[col] = x[col].str.replace('[,]','.', regex=True).astype('float64')
+            x = float_repair(x, [col])
 
     print(f"[ {pd.Timestamp.now()} ] Relatório criado")
 
