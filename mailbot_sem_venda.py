@@ -44,7 +44,7 @@ def enviar_sem_venda():
     if pdf_buffer:
         
       nome_pdf = f"{titulo} - {datetime.now().strftime('%d-%m')}.pdf"
-      destinatario = ','.join(['matheus.moura@bistek.com.br'])
+      destinatario = ','.join(emails)
 
       print(f"Enviando e-mail para {destinatario}...") 
         
