@@ -12,7 +12,6 @@ import os
 import pandas as pd
 import panel as pn
 import pdfkit
-from reportlab.lib import colorse
 from reportlab.lib.pagesizes import letter
 from reportlab.platypus import SimpleDocTemplate, Table, TableStyle
 import re
@@ -21,6 +20,7 @@ import smtplib
 import time
 import urllib3
 from urllib import parse
+from io import StringIO
 
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
