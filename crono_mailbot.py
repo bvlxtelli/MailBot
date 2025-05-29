@@ -60,8 +60,9 @@ if dia_da_semana == 'Quinta':
     enviar_qbc_troca_665()
 
     enviar_quebra_campanha()
-    enviar_suspeitos_pendentes()
     enviar_divergencias_altas()
+    enviar_suspeitos_pendentes()
+    
 
 if dia_da_semana == 'Sexta':
 
