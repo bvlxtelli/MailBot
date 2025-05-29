@@ -61,16 +61,25 @@ f = qbc(coluna='NSECAO',relacao=relacao_ovos,parametro='QTD',valor=0)
 g = qbc(coluna='NSECAO',relacao=relacao_leite,parametro='QTD',valor=12)
 h = qbc(coluna='NSECAO',relacao=relacao_acougue,parametro='QTD',valor=3)
 
+relatorios = {
+    'QUEBRA ZERO - PADARIA': a,
+    'OVOS - TROCA NA QUEBRA': b,
+    'QUEBRA CONHECIDA - CERVEJAS': c,
+    'QUEBRA ZERO - FRIOS': d,
+    'QUEBRA ZERO - FRUTAS SECAS': e,
+    'QUEBRA ZERO - OVOS': f,
+    'QUEBRA CONHECIDA - LEITE':g,
+    'QUEBRA CONHECIDA - ACOUGUE':h
+    }
+
 def enviar_quebras():
 
-    tabelas = [a,b,c,d,e,f,g,h]
-
-    for tabela in tabelas:
+    for desc, tabela in relatorios.items():
 
         enviar_email_com_tabela(
             tabela,
-            teste_com_digito,
-            "QUEBRA CONHECIDA",
+            teste_jutiao,
+            f"{desc}",
             """
             <div>Bom dia/tarde,
             <br><br>
