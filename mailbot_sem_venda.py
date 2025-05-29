@@ -24,6 +24,8 @@ def sem_venda(x):
         (y['DTULTENTRADA'] < dsv)
     ]
 
+    y.to_excel(f'C:\\Users\\Usuario\\Downloads\\ESPELHO - {titulo} - {hj}.xlsx', index=False)
+
     return y
 
 def enviar_sem_venda():
