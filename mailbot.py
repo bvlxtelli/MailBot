@@ -101,7 +101,7 @@ def enviar_email(service, destinatario, assunto, corpo, caminho_anexo=None, anex
     html=html
 )
   send_message = service.users().messages().send(userId='me', body=mensagem).execute()
-  print(f"[ {pd.Timestamp.now()} ] E-mail enviado! ID da mensagem: {send_message['id']}")
+  print(f"[ {pd.Timestamp.now().strftime("%Y-%m-%d %H:%M:%S")} ] E-mail enviado! ID da mensagem: {send_message['id']}")
 
 def teste_email():
     
