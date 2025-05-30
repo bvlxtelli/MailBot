@@ -8,8 +8,8 @@ def criar_pereciveis():
     bdsecoes.columns = ['SECAO','DESCRICAO_SECAO','DPTO','DESCRICAO_DPTO','Qtd. Produtos']
     bdperec = repair_things(carregar_relatorio("pereciveis"), string=['PERECIVEIS', 'SECAO'])
     bdsecoes = bdsecoes.merge(bdperec, on='SECAO', how='left').fillna('-')
-    inventarios = repair_things(df=carregar_relatorio("relatorio_1334"), string=['CODIGO', 'DESCRICAO', 'DPTO', 'SECAO','DIAS_ULT_INV'], date=['DATA_ULT_INV'], int=['FILIAL'], float=['SALDO'])
-    congelados = repair_things(df=carregar_relatorio("relatorio_1416"), string=['NUM_INV', 'DESCRICAO_INV', 'DESC_FILIAL', 'RMS','DESCRICAO', 'SECAO', 'DESC_SECAO'], date=['DATA'], int=['FILIAL'])
+    inventarios = repair_things(df=baixar_relatorio(1334), string=['CODIGO', 'DESCRICAO', 'DPTO', 'SECAO','DIAS_ULT_INV'], date=['DATA_ULT_INV'], int=['FILIAL'], float=['SALDO'])
+    congelados = repair_things(df=baixar_relatorio(1416), string=['NUM_INV', 'DESCRICAO_INV', 'DESC_FILIAL', 'RMS','DESCRICAO', 'SECAO', 'DESC_SECAO'], date=['DATA'], int=['FILIAL'])
     congelados.columns = ['NUM_INV','DESCRICAO_INV','DATA_CG','FILIAL','DESC_FILIAL','CODIGO','DESCRICAO','SECAO','DESC_SECAO']
     congelados_filtro = ['DATA_CG','FILIAL','CODIGO']
     congelados = congelados[congelados_filtro]
