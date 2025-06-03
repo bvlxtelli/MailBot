@@ -23,7 +23,7 @@ def inventarios_altos():
             (
             (x['DATA'].isin([sexta, anteontem, ontem])) &
             ((x['DIVERG_PERC'] > 1.80) | (x['DIVERG_PERC'] < 0.80)) &
-            (x['TOTAL_SIST'] > 500)
+            (x['TOTAL_SIST'] > 1000)
             )
             |
             (x['TOTAL_SIST'] > 1000)
