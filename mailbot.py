@@ -323,3 +323,5 @@ teste_jutiao = {
     329: ['matheus.moura@bistek.com.br', 'juliano.tavares@bistek.com.br', 'sebastiao.nobre@bistek.com.br'],
     337: ['matheus.moura@bistek.com.br', 'juliano.tavares@bistek.com.br', 'sebastiao.nobre@bistek.com.br'],
 }
+
+central_cbm = ['matheus.moura@bistek.com.br','daniel.santos@bistek.com.br','juliano.tavares@bistek.com.br']

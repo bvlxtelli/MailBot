@@ -31,7 +31,7 @@ def enviar_duplicidades_gerenciais():
         assunto = f"{titulo} - {hj.strftime('%d-%m')}"
         corpo = f"""{corpo_texto}{tabela_html}"""
 
-        destinatario = ','.join(['matheus.moura@bistek.com.br','daniel.santos@bistek.com.br','juliano.tavares@bistek.com.br'])
+        destinatario = ','.join(central_cbm)
         print(f"[ {pd.Timestamp.now()} ] Enviando e-mail para {destinatario}...")
 
         enviar_email(
