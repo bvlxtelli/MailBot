@@ -73,4 +73,19 @@ def repair_things(df=None, string=None, strip=None, float=None, date=None, int=N
 
     return df
 
+def to_html_table(dados):
+
+    tabela_html = dados.to_html(index=False, justify='center', border=0, classes='tabela-pereciveis')
+    tabela_html = tabela_html.replace(
+        "<table>",
+        """<table style="border-collapse:collapse;width:100%;font-family:Arial, sans-serif;font-size:14px">""")
+    tabela_html = tabela_html.replace(
+        "<th>",
+        """<th style="text-align:center;padding:8px;border-bottom:2px solid #adadad;background-color:#676767;color:#ffffff">""")
+    tabela_html = tabela_html.replace(
+        "<td>",
+        """<td style="padding:6px;text-align:center;border-bottom:1px solid #ddd">""")
+    
+    return tabela_html
+
 print(f"[ {pd.Timestamp.now()} ] Módulo {titulo} carregado")
