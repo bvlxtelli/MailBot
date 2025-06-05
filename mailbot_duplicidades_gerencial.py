@@ -28,7 +28,7 @@ def enviar_duplicidades_gerenciais():
         tabela_html = to_html_table(a)
         corpo_texto = """<p>Teste<p>"""
 
-        assunto = f"{titulo} - {hj.strftime('%d-%m')}"
+        assunto = f"{titulo} - {hoje.strftime('%d-%m')}"
         corpo = f"""{corpo_texto}{tabela_html}"""
 
         destinatario = ','.join(central_cbm)
