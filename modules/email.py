@@ -32,7 +32,7 @@ def enviar_email_com_tabela(base,grupo,titulo_texto,corpo_texto):
 
             else:
 
-                titulo = f"{titulo_texto} - {sexta.strftime('%d/%m')}, {ontem.strftime('%d/%m')} E {anteontem.strftime('%d/%m/%Y')} - LOJA {loja}"
+                titulo = f"{titulo_texto} - {sexta.strftime('%d')}, {ontem.strftime('%d')} E {anteontem.strftime('%d/%m')} - LOJA {loja}"
             
             assunto = titulo
             corpo = f"""{corpo_texto}{tabela_html}"""
