@@ -73,8 +73,11 @@ params_1444 = {
     'paginado':'false'
 }
 
+if dia_da_semana == 'Segunda':
+    params_1444['condicao_12686'] = {sexta.strftime('%d/%m/%Y')}
+
 params_1124 = {
-    'condicao_11106':(ontem.strftime('%Y%m')),
+    'condicao_11106':{ontem.strftime('%d/%m/%Y')},
     'condicao_12898':'',
     'paginado':'false'
 }
