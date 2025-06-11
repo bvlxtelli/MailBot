@@ -2,9 +2,10 @@ from .my_vars import *
 
 titulo = "Paths"
 
-BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", "# Painel"))
+BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", "cbmPanel"))
 
 PATHS = {
+    
     "root": os.path.join(BASE_DIR),
 
     "credentials": os.path.join(BASE_DIR, "credentials", "logins.json"),
@@ -23,6 +24,7 @@ PATHS = {
     
     "database/csv": os.path.join(BASE_DIR, "database", "csv"),
     "database/csv/suspeitos_backup": os.path.join(BASE_DIR, "database", "csv", "suspeitos_backup")
+    
 }
 
 REL_PATHS = {}
