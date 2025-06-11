@@ -2,8 +2,8 @@ from my_lib import *
 from mailbot import *
 from modules import quebra_conhecida, pdf_creator
 
-print(f"[ {pd.Timestamp.now()} ] Iniciando aplicação...")
-print(f"[ {pd.Timestamp.now()} ] Buscando relatório no Thincake...")
+print(f"[ {pd.Timestamp.now().strftime("%Y-%m-%d %H:%M:%S")} ] Iniciando aplicação...")
+print(f"[ {pd.Timestamp.now().strftime("%Y-%m-%d %H:%M:%S")} ] Buscando relatório no Thincake...")
 
 def criar_vencidos(depto=None, loja=False):
 
@@ -54,19 +54,19 @@ def criar_vencidos(depto=None, loja=False):
 
     if loja is True and depto is not None:
 
-        print(f"[ {pd.Timestamp.now()} ] Relatório criado: VENCIDOS - LOJAS - {depto}")
+        print(f"[ {pd.Timestamp.now().strftime("%Y-%m-%d %H:%M:%S")} ] Relatório criado: VENCIDOS - LOJAS - {depto}")
     
     elif loja is True and depto is None:
 
-        print(f"[ {pd.Timestamp.now()} ] Relatório criado: VENCIDOS - LOJAS")
+        print(f"[ {pd.Timestamp.now().strftime("%Y-%m-%d %H:%M:%S")} ] Relatório criado: VENCIDOS - LOJAS")
     
     elif loja is False and depto is not None:
 
-        print(f"[ {pd.Timestamp.now()} ] Relatório criado: VENCIDOS - REDE - {depto}")
+        print(f"[ {pd.Timestamp.now().strftime("%Y-%m-%d %H:%M:%S")} ] Relatório criado: VENCIDOS - REDE - {depto}")
     
     elif loja is False and depto is None:
 
-        print(f"[ {pd.Timestamp.now()} ] Relatório criado: VENCIDOS - REDE")
+        print(f"[ {pd.Timestamp.now().strftime("%Y-%m-%d %H:%M:%S")} ] Relatório criado: VENCIDOS - REDE")
 
     return x
 
@@ -98,12 +98,12 @@ def gerar_pdfs_vencidos():
     relatorios = gerar_relatorios()
 
     for titulo, relatorio in relatorios.items():
-        print(f"[ {pd.Timestamp.now()} ] Gerando PDF em memória: {titulo}")
+        print(f"[ {pd.Timestamp.now().strftime("%Y-%m-%d %H:%M:%S")} ] Gerando PDF em memória: {titulo}")
 
         copia = relatorio.copy()
 
         if copia.empty:
-            print(f"[ {pd.Timestamp.now()} ] Nenhum dado para {titulo}. Pulando...")
+            print(f"[ {pd.Timestamp.now().strftime("%Y-%m-%d %H:%M:%S")} ] Nenhum dado para {titulo}. Pulando...")
             continue
 
         copia['QTD'] = pd.to_numeric(copia['QTD'], errors='coerce').round(4)
@@ -150,7 +150,7 @@ def gerar_pdfs_vencidos():
         nome_pdf = f"{titulo} - {seg_pass} A {ont}.pdf"
         anexos[nome_pdf] = pdf_buffer
 
-        print(f"[ {pd.Timestamp.now()} ] PDF de {titulo} gerado.")
+        print(f"[ {pd.Timestamp.now().strftime("%Y-%m-%d %H:%M:%S")} ] PDF de {titulo} gerado.")
 
     return anexos
 
@@ -181,13 +181,13 @@ def enviar_vencidos():
     </div>
     """
 
-    print(f"[ {pd.Timestamp.now()} ] Gerando PDFs para envio...")
+    print(f"[ {pd.Timestamp.now().strftime("%Y-%m-%d %H:%M:%S")} ] Gerando PDFs para envio...")
     anexos = gerar_pdfs_vencidos()
 
     if anexos:
         
         destinatario = ",".join(['jocelene.paes@bistek.com.br','uzias.souza@bistek.com.br','central.cbm@bistek.com.br'])#['matheus.moura@bistek.com.br'])
-        print(f"[ {pd.Timestamp.now()} ] Enviando e-mail para {destinatario}...")
+        print(f"[ {pd.Timestamp.now().strftime("%Y-%m-%d %H:%M:%S")} ] Enviando e-mail para {destinatario}...")
 
         enviar_email(
             service,
@@ -198,7 +198,7 @@ def enviar_vencidos():
             multiplos_anexos=anexos
         )
     else:
-        print(f"[ {pd.Timestamp.now()} ] Nenhum dado. E-mail não enviado.")
+        print(f"[ {pd.Timestamp.now().strftime("%Y-%m-%d %H:%M:%S")} ] Nenhum dado. E-mail não enviado.")
 
 if __name__ == "__main__":
     enviar_vencidos()

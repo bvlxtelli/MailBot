@@ -1,8 +1,8 @@
 from my_lib import *
 from mailbot import *
 
-print(f"[ {pd.Timestamp.now()} ] Iniciando aplicação...")
-print(f"[ {pd.Timestamp.now()} ] Buscando relatório no Thincake...")
+print(f"[ {pd.Timestamp.now().strftime("%Y-%m-%d %H:%M:%S")} ] Iniciando aplicação...")
+print(f"[ {pd.Timestamp.now().strftime("%Y-%m-%d %H:%M:%S")} ] Buscando relatório no Thincake...")
 
 def maiores_quebras(df):
 
@@ -24,7 +24,7 @@ def maiores_quebras(df):
     df['PRODUTO'] = df['PRODUTO'].str.strip()
     df['NDEPTO'] = df['NDEPTO'].str.strip()
 
-    print(f"[ {pd.Timestamp.now()} ] Relatório criado")
+    print(f"[ {pd.Timestamp.now().strftime("%Y-%m-%d %H:%M:%S")} ] Relatório criado")
 
     if dia_da_semana != 'Segunda':
         df = df[(df['DATA_FATURAMENTO'] >= anteontem) & (df['DATA_FATURAMENTO'] < hoje)]
@@ -48,7 +48,7 @@ def gerar_pdf_mqc():
     copia = mqc.copy()
 
     if copia.empty:
-        print(f"[ {pd.Timestamp.now()} ] Nenhum dado. Cancelando...")
+        print(f"[ {pd.Timestamp.now().strftime("%Y-%m-%d %H:%M:%S")} ] Nenhum dado. Cancelando...")
         return None
 
     copia['QTD'] = pd.to_numeric(copia['QTD'], errors='coerce').round(4)
@@ -94,7 +94,7 @@ def gerar_pdf_mqc():
             plt.close()
 
     pdf_buffer.seek(0)
-    print(f"[ {pd.Timestamp.now()} ] PDF gerado em memória.")
+    print(f"[ {pd.Timestamp.now().strftime("%Y-%m-%d %H:%M:%S")} ] PDF gerado em memória.")
 
     return pdf_buffer
 
@@ -111,7 +111,7 @@ def enviar_maiores_quebras():
     
     <p>Att.</p>"""
 
-    print(f"[ {pd.Timestamp.now()} ] Gerando PDF para loja...")
+    print(f"[ {pd.Timestamp.now().strftime("%Y-%m-%d %H:%M:%S")} ] Gerando PDF para loja...")
     pdf_buffer = gerar_pdf_mqc()
 
     if pdf_buffer:
@@ -119,7 +119,7 @@ def enviar_maiores_quebras():
         nome_pdf = f"{assunto.replace("À", "A")}.pdf"
         destinatario = ",".join(['jocelene.paes@bistek.com.br','maurici@bistek.com.br','uzias.souza@bistek.com.br','central.cbm@bistek.com.br'])
 
-        print(f"[ {pd.Timestamp.now()} ] Enviando e-mail para {destinatario}...")
+        print(f"[ {pd.Timestamp.now().strftime("%Y-%m-%d %H:%M:%S")} ] Enviando e-mail para {destinatario}...")
         enviar_email(
             service,
             destinatario,
@@ -133,7 +133,7 @@ def enviar_maiores_quebras():
 
     else:
 
-        print(f"[ {pd.Timestamp.now()} ] Sem dados. E-mail não enviado.")
+        print(f"[ {pd.Timestamp.now().strftime("%Y-%m-%d %H:%M:%S")} ] Sem dados. E-mail não enviado.")
 
 if __name__ == "__main__":
     enviar_maiores_quebras()

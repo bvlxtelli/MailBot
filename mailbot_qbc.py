@@ -2,15 +2,15 @@ from my_lib import *
 from mailbot import *
 from modules import quebra_conhecida, enviar_email_com_tabela
 
-print(f"[ {pd.Timestamp.now()} ] Iniciando aplicação...")
+print(f"[ {pd.Timestamp.now().strftime("%Y-%m-%d %H:%M:%S")} ] Iniciando aplicação...")
 
 def qbc(coluna=None, relacao=None, parametro=None, valor=None):
 
-    print(f"[ {pd.Timestamp.now()} ] Buscando relatório no Thincake...")
+    print(f"[ {pd.Timestamp.now().strftime("%Y-%m-%d %H:%M:%S")} ] Buscando relatório no Thincake...")
 
     x = quebra_conhecida()
 
-    print(f"[ {pd.Timestamp.now()} ] Relatório criado")
+    print(f"[ {pd.Timestamp.now().strftime("%Y-%m-%d %H:%M:%S")} ] Relatório criado")
 
     if dia_da_semana != 'Segunda':
         x = x[(x['DATA_FATURAMENTO'] == ontem)]

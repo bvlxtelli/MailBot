@@ -76,11 +76,11 @@ def enviar_agendas():
             
                 else:
 
-                    print(f"[ {pd.Timestamp.now()} ] Loja {loja} sem dados. E-mail não enviado.")
+                    print(f"[ {pd.Timestamp.now().strftime("%Y-%m-%d %H:%M:%S")} ] Loja {loja} sem dados. E-mail não enviado.")
                     continue
         
                 destinatario = ','.join(emails)
-                print(f"[ {pd.Timestamp.now()} ] Enviando e-mail para {destinatario}...")
+                print(f"[ {pd.Timestamp.now().strftime("%Y-%m-%d %H:%M:%S")} ] Enviando e-mail para {destinatario}...")
 
                 enviar_email(
                     service,

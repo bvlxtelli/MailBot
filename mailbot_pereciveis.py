@@ -91,7 +91,7 @@ def enviar_pereciveis():
 
     for loja, emails in inventario_com_digito.items():
         
-        print(f"[ {pd.Timestamp.now()} ] Gerando dados para loja {loja}...")
+        print(f"[ {pd.Timestamp.now().strftime("%Y-%m-%d %H:%M:%S")} ] Gerando dados para loja {loja}...")
 
         dados_loja = pendentes(pereciveis, loja)
 
@@ -122,7 +122,7 @@ def enviar_pereciveis():
             """
 
             destinatario = ','.join(emails)
-            print(f"[ {pd.Timestamp.now()} ] Enviando e-mail para {destinatario}...")
+            print(f"[ {pd.Timestamp.now().strftime("%Y-%m-%d %H:%M:%S")} ] Enviando e-mail para {destinatario}...")
 
             enviar_email(
                 service,
@@ -133,7 +133,7 @@ def enviar_pereciveis():
             )
 
         else:
-            print(f"[ {pd.Timestamp.now()} ] Loja {loja} sem dados. E-mail não enviado.")
+            print(f"[ {pd.Timestamp.now().strftime("%Y-%m-%d %H:%M:%S")} ] Loja {loja} sem dados. E-mail não enviado.")
 
 if __name__ == "__main__":
     enviar_pereciveis()

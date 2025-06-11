@@ -110,7 +110,7 @@ def enviar_qbc_troca_665():
             f"TROCA LANÇADA NA QUEBRA - AGENDA 665 - LOJA {loja} - {ontem.strftime('%d/%m')}"
             tal_dia = ontem.strftime('%d/%m/%Y')
         
-        print(f"[ {pd.Timestamp.now()} ] Gerando dados para loja {loja}...")
+        print(f"[ {pd.Timestamp.now().strftime("%Y-%m-%d %H:%M:%S")} ] Gerando dados para loja {loja}...")
 
         dados_loja = a[a['FILIAL'] == loja]
 
@@ -143,7 +143,7 @@ def enviar_qbc_troca_665():
             """
 
             destinatario = ','.join(emails)
-            print(f"[ {pd.Timestamp.now()} ] Enviando e-mail para {destinatario}...")
+            print(f"[ {pd.Timestamp.now().strftime("%Y-%m-%d %H:%M:%S")} ] Enviando e-mail para {destinatario}...")
 
             enviar_email(
                 service,
@@ -154,7 +154,7 @@ def enviar_qbc_troca_665():
             )
 
         else:
-            print(f"[ {pd.Timestamp.now()} ] Loja {loja} sem dados. E-mail não enviado.")
+            print(f"[ {pd.Timestamp.now().strftime("%Y-%m-%d %H:%M:%S")} ] Loja {loja} sem dados. E-mail não enviado.")
 
 if __name__ == "__main__":
     
