@@ -17,74 +17,40 @@ from mailbot_qbc_troca_665 import enviar_qbc_troca_665
 from mailbot_quebra_campanha import enviar_quebra_campanha
 from mailbot_divergencias_altas import enviar_divergencias_altas
 from mailbot_duplicidades_gerencial import enviar_duplicidades_gerenciais
+from mailbot_saldo_maior_que_ep import enviar_saldo_maior_que_ep
+
+if dia_da_semana in ['Segunda', 'Quarta', 'Sexta']:
+    
+    enviar_maiores_quebras()
+
+if dia_da_semana in ['Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta']:
+    
+    enviar_sacolas()
+    enviar_bolos()
+    enviar_qbc_troca_665()
+
+    enviar_saldo_maior_que_ep()
+    enviar_duplicidades_gerenciais()
+
+    enviar_quebra_campanha()
+    enviar_divergencias_altas()
 
 if dia_da_semana == 'Segunda':
-
-    enviar_maiores_quebras()
-    enviar_vencidos()
-
-    enviar_sacolas()
-    enviar_bolos()
-    enviar_qbc_troca_665()
-
-    enviar_duplicidades_gerenciais()
-
-    enviar_quebra_campanha()
-    enviar_sem_venda()
-    enviar_divergencias_altas()
-
-if dia_da_semana == 'Terça':
-
-    enviar_sacolas()
-    enviar_bolos()
-    enviar_qbc_troca_665()
     
-    enviar_duplicidades_gerenciais()
-
-    enviar_quebra_campanha()
-    enviar_divergencias_altas()
+    enviar_vencidos()
+    enviar_sem_venda()
 
 if dia_da_semana == 'Quarta':
-
-    enviar_maiores_quebras()
-
-    enviar_sacolas()
-    enviar_bolos()
-    enviar_qbc_troca_665()
-
-    enviar_duplicidades_gerenciais()
-
+    
     enviar_agendas()
     enviar_agendas_por_valor()
 
-    enviar_quebra_campanha()
-    enviar_divergencias_altas()
-
 if dia_da_semana == 'Quinta':
-
-    enviar_sacolas()
-    enviar_bolos()
-    enviar_qbc_troca_665()
     
-    enviar_duplicidades_gerenciais()
-
-    enviar_quebra_campanha()
-    enviar_divergencias_altas()
     enviar_suspeitos_pendentes()
-    
 
 if dia_da_semana == 'Sexta':
-
-    enviar_maiores_quebras()
-
-    enviar_sacolas()
-    enviar_bolos()
-    enviar_qbc_troca_665()
     
-    enviar_duplicidades_gerenciais()
-
-    enviar_quebra_campanha()
-    enviar_divergencias_altas()
     enviar_pereciveis()
 
 
