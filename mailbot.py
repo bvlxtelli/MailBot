@@ -12,7 +12,7 @@ from google.auth.transport.requests import Request
 from googleapiclient.discovery import build
 from my_lib import *
 
-"""Commit Test"""
+"""Teste"""
 
 # Escopos necessários para enviar e-mails
 SCOPES = [
