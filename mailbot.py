@@ -12,7 +12,7 @@ from google.auth.transport.requests import Request
 from googleapiclient.discovery import build
 from my_lib import *
 
-# Escopos necessários para enviar e-mails
+# Escopos necessários para enviar e-mails.
 SCOPES = [
   'https://mail.google.com/',
   'https://www.googleapis.com/auth/gmail.modify',
