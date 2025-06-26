@@ -1,4 +1,4 @@
-from my_lib import *
+from utils import *
 from mailbot import *
 
 print(f"[ {pd.Timestamp.now().strftime("%Y-%m-%d %H:%M:%S")} ] Iniciando aplicação...")

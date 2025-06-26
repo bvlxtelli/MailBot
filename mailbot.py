@@ -10,7 +10,7 @@ from google.oauth2.credentials import Credentials
 from google_auth_oauthlib.flow import InstalledAppFlow
 from google.auth.transport.requests import Request
 from googleapiclient.discovery import build
-from my_lib import *
+from utils import *
 
 # Escopos necessários para enviar e-mails.
 SCOPES = [
@@ -21,8 +21,8 @@ SCOPES = [
 ]
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-TOKEN_PATH = os.path.join(BASE_DIR, 'credentials', 'token.json')
-SECRET_PATH = os.path.join(BASE_DIR, 'credentials', 'client_secret.json')
+TOKEN_PATH = os.path.join(BASE_DIR, 'utils', 'credentials', 'token.json')
+SECRET_PATH = os.path.join(BASE_DIR, 'utils', 'credentials', 'client_secret.json')
 
 def login():
     creds = None

@@ -1,6 +1,5 @@
-from my_lib import *
+from utils import *
 from mailbot import *
-from modules import gerar_pdf
 
 dtmin = pd.to_datetime('01/01/1990', format='%d/%m/%Y', dayfirst=True)
 dias = timedelta(days=2)

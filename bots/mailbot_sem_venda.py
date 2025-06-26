@@ -1,6 +1,5 @@
-from my_lib import *
+from utils import *
 from mailbot import *
-from modules import gerar_pdf
 
 x_dias = 45 # Dias
 dias = timedelta(days=x_dias)

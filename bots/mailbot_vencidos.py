@@ -1,6 +1,5 @@
-from my_lib import *
+from utils import *
 from mailbot import *
-from modules import quebra_conhecida, pdf_creator
 
 print(f"[ {pd.Timestamp.now().strftime("%Y-%m-%d %H:%M:%S")} ] Iniciando aplicação...")
 print(f"[ {pd.Timestamp.now().strftime("%Y-%m-%d %H:%M:%S")} ] Buscando relatório no Thincake...")

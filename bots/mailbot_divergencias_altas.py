@@ -1,6 +1,5 @@
-from my_lib import *
+from utils import *
 from mailbot import *
-from modules import inventarios, enviar_email_com_tabela
 
 def inventarios_altos():
 

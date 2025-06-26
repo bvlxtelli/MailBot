@@ -1,6 +1,5 @@
-from my_lib import *
+from utils import *
 from mailbot import *
-from modules import enviar_email_com_tabela
 
 titulo = 'SALDO MAIOR QUE ESTOQUE PADRÃO'
 

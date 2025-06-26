@@ -1,4 +1,4 @@
-from my_lib import *
+from utils import *
 from mailbot import *
 
 #agd = pd.read_csv('C:\\Users\\Usuario\\Downloads\\relatorio_274-28-04-2025.csv', delimiter=';')
