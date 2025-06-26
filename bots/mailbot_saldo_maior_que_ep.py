@@ -33,7 +33,7 @@ def enviar_saldo_maior_que_ep():
             assunto = f"{titulo} - {hoje.strftime('%d-%m')}"
             corpo = f"""{corpo_texto}{tabela_html}"""
 
-            destinatario = ','.join(central_cbm)
+            destinatario = ','.join(central_cbm + 'lucas.sedrez@bistek.com.br')
             print(f"[ {pd.Timestamp.now().strftime("%Y-%m-%d %H:%M:%S")} ] Enviando e-mail para {destinatario}...")
 
             enviar_email(
