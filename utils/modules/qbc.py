@@ -1,4 +1,4 @@
-from my_lib import *
+from ..my_lib import *
 
 def quebra_conhecida():
 

@@ -1,4 +1,4 @@
-from my_lib import *
+from ..my_lib import *
 from mailbot import *
 
 def enviar_email_com_tabela(base,grupo,titulo_texto,corpo_texto):
