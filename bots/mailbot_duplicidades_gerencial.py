@@ -1,5 +1,4 @@
-from utils import *
-from mailbot import *
+from __base__ import *
 
 titulo = 'DIVERGÊNCIAS - GERENCIAL'
 

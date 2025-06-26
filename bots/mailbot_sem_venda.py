@@ -1,5 +1,4 @@
-from utils import *
-from mailbot import *
+from __base__ import *
 
 x_dias = 45 # Dias
 dias = timedelta(days=x_dias)

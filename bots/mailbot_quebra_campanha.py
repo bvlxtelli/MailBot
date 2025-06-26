@@ -1,5 +1,4 @@
-from utils import *
-from mailbot import *
+from __base__ import *
 
 codigos_da_campanha = ["3060187", "2329395", "2329409", "2329468", "2329450", "2329441", "2329387", "2329417", "2329433", "2329425"]
 

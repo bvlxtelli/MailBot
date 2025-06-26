@@ -1,5 +1,4 @@
-from utils import *
-from mailbot import *
+from __base__ import *
 
 fornecedores = ['107123','173630','272850','84445','450200','460028','476536','481947']
 

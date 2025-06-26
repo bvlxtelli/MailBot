@@ -1,5 +1,4 @@
-from utils import *
-from mailbot import *
+from __base__ import *
 
 dtmin = pd.to_datetime('01/01/1990', format='%d/%m/%Y', dayfirst=True)
 dias = timedelta(days=2)

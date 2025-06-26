@@ -1,4 +1,4 @@
-from my_lib import *
+from utils import *
 from mailbot import *
 
 import warnings
