@@ -12,3 +12,4 @@ from .mailbot_quebra_campanha import enviar_quebra_campanha
 from .mailbot_divergencias_altas import enviar_divergencias_altas
 from .mailbot_duplicidades_gerencial import enviar_duplicidades_gerenciais
 from .mailbot_saldo_maior_que_ep import enviar_saldo_maior_que_ep
+from .mailbot_bolos_sem_venda import enviar_bolos_sem_venda
