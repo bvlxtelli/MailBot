@@ -7,7 +7,7 @@ warnings.simplefilter(action='ignore', category=pd.errors.SettingWithCopyWarning
 from bots import *
 
 if dia_da_semana in ['Segunda', 'Quarta', 'Sexta']:
-    
+
     enviar_maiores_quebras()
 
 if dia_da_semana in ['Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta']:
@@ -26,6 +26,10 @@ if dia_da_semana == 'Segunda':
     
     enviar_vencidos()
     enviar_sem_venda()
+
+if dia_da_semana == 'Terça':
+
+    enviar_bolos_sem_venda()
 
 if dia_da_semana == 'Quarta':
     
