@@ -1,7 +1,7 @@
 from ..my_lib import *
 from mailbot import *
 
-def enviar_email_com_tabela(base,grupo,titulo_texto,corpo_texto):
+def enviar_email_com_tabela(base,grupo,titulo_texto,corpo_texto,filial_ou_loja=None):
     
     service = login()
 
@@ -11,7 +11,10 @@ def enviar_email_com_tabela(base,grupo,titulo_texto,corpo_texto):
         
         print(f"[ {pd.Timestamp.now()} ] Gerando dados para loja {loja}...")
 
-        dados_loja = a[(a['FILIAL'].astype(int)) == loja]
+        if filial_ou_loja == None:
+            dados_loja = a[(a['FILIAL'].astype(int)) == loja]
+        elif filial_ou_loja == 'loja':
+            dados_loja = a[(a['LOJA'].astype(int)) == loja]
 
         if not dados_loja.empty:
 
