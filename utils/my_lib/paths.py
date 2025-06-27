@@ -2,7 +2,7 @@ from .my_vars import *
 
 titulo = "Paths"
 
-BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", "cbmPanel"))
+BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", "..", "cbmPanel"))
 
 PATHS = {
     
