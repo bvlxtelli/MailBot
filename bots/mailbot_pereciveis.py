@@ -1,4 +1,4 @@
-from __base__ import *
+from .__base__ import *
 
 def criar_pereciveis():
 

@@ -1,4 +1,4 @@
-from __base__ import *
+from .__base__ import *
 
 def agenda_151(y):
 
