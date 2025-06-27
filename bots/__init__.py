@@ -1,6 +1,3 @@
-import warnings
-warnings.simplefilter(action='ignore', category=pd.errors.SettingWithCopyWarning)
-
 from .mailbot_agendas_semanais import enviar_agendas
 from .mailbot_agendas_semanais_vlr import enviar_agendas_por_valor
 from .mailbot_bolos import enviar_bolos
