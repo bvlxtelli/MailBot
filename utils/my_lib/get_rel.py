@@ -49,8 +49,8 @@ params_1132 = {
 params_1262 = {
     'condicao_12973': '',
     'condicao_12974': '',
-    'condicao_13037': {(hoje - (timedelta(days=7))).strftime('%d/%m/%Y')},
-    'condicao_13038': {ontem.strftime('%d/%m/%Y')},
+    'condicao_13037': f"{(hoje - (timedelta(days=7))).strftime('%d/%m/%Y')}",
+    'condicao_13038': f"{ontem.strftime('%d/%m/%Y')}",
     'condicao_12978': '',
     'condicao_11466': '',
     'condicao_12981': '',
