@@ -27,10 +27,6 @@ if dia_da_semana == 'Segunda':
     enviar_vencidos()
     enviar_sem_venda()
 
-if dia_da_semana == 'Terça':
-
-    enviar_bolos_sem_venda()
-
 if dia_da_semana == 'Quarta':
     
     enviar_agendas()
@@ -42,6 +38,7 @@ if dia_da_semana == 'Quinta':
 
 if dia_da_semana == 'Sexta':
     
+    enviar_bolos_sem_venda()
     enviar_pereciveis()
 
 
