@@ -24,8 +24,8 @@ SCOPES = [
 ]
 
 BASE_DIR = os.path.dirname(os.path.abspath(sys.modules['__main__'].__file__))
-TOKEN_PATH = os.path.join(BASE_DIR, 'dependencies', 'credentials', 'token.json') 
-SECRET_PATH = os.path.join(BASE_DIR, 'dependencies', 'credentials', 'client_secret.json')
+TOKEN_PATH = os.path.join(BASE_DIR, 'credentials', 'token.json') 
+SECRET_PATH = os.path.join(BASE_DIR, 'credentials', 'client_secret.json')
 
 def login():
     logger.info("Iniciando o processo de login.")
