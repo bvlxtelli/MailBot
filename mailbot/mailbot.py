@@ -11,6 +11,7 @@ from google.oauth2.credentials import Credentials
 from google_auth_oauthlib.flow import InstalledAppFlow
 from google.auth.transport.requests import Request
 from googleapiclient.discovery import build
+import mimetypes
 import logging
 
 logger = logging.getLogger(__name__)
@@ -80,7 +81,9 @@ def criar_mensagem(destinatario, assunto, corpo, caminho_anexo=None, anexo_buffe
 
     elif anexo_buffer and nome_anexo:
         logger.debug(f"Anexo em buffer adicionado com o nome: {nome_anexo}")
-        mime_base = MIMEBase('application', 'pdf')
+        mime_type, _ = mimetypes.guess_type(nome_anexo)
+        main_type, sub_type = mime_type.split('/') if mime_type else ('application', 'octet-stream')
+        mime_base = MIMEBase(main_type, sub_type)
         mime_base.set_payload(anexo_buffer.read())
         encoders.encode_base64(mime_base)
         mime_base.add_header('Content-Disposition', f'attachment; filename="{str(Header(nome_anexo, "utf-8"))}"')
