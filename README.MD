@@ -1,18 +1,19 @@
-# 📧 **MailBot** *por Matheus Moura*
 
-Este módulo permite o envio de e-mails com ou sem anexos usando a API do Gmail com autenticação OAuth2 do Google. É compatível com envio de anexos locais, anexos em memória (`BytesIO`) e múltiplos arquivos PDF.
+# 📧 **MailBot** *by Matheus Moura*
+
+This module enables sending emails with or without attachments using the Gmail API and Google's OAuth2 authentication. It supports local file attachments, in-memory attachments (`BytesIO`), and multiple PDF files.
 
 ---
 
-## 📦 Requisitos
+## 📦 Requirements
 
-🚀 Instalação do módulo
+🚀 Module Installation
 
 ```bash
-pip install git+https://git.bistek.com.br/cbm/mailbot.git
+pip install git+https://github.com/bvlxtelli/MailBot.git
 ```
 
-Instale as dependências com:
+Install the dependencies with:
 
 ```bash
 pip install --upgrade google-api-python-client google-auth google-auth-oauthlib
@@ -20,89 +21,89 @@ pip install --upgrade google-api-python-client google-auth google-auth-oauthlib
 
 ---
 
-## 📁 Estrutura esperada
+## 📁 Expected Structure
 
-O módulo espera os arquivos de credenciais do Google:
+The module expects the following Google credential files:
 
 ```
 credentials/
-├── client_secret.json   # fornecido pelo Google Cloud
-└── token.json           # gerado automaticamente após o primeiro login
+├── client_secret.json   # provided by Google Cloud
+└── token.json           # automatically generated after first login
 ```
 
-- `client_secret.json`: Baixe em [console.cloud.google.com](https://console.cloud.google.com/) ao criar um OAuth Client ID
-- `token.json`: Gerado automaticamente após o fluxo de autenticação
+- `client_secret.json`: Download from [console.cloud.google.com](https://console.cloud.google.com/) after creating an OAuth Client ID
+- `token.json`: Automatically generated after the authentication flow
 
 ---
 
-## 🚀 Como usar
+## 🚀 How to Use
 
-### 1. **Importe e faça login no serviço do Gmail**
+### 1. **Import and login to the Gmail service**
 
 ```python
-from seu_modulo import login, enviar_email
+from your_module import login, enviar_email
 
 service = login()
 ```
 
 ---
 
-### 2. **Envie um e-mail simples**
+### 2. **Send a simple email**
 
 ```python
 enviar_email(
     service=service,
-    destinatario="exemplo@dominio.com",
-    assunto="Teste",
-    corpo="Olá! Esse é um e-mail enviado via API.",
+    destinatario="example@domain.com",
+    assunto="Test",
+    corpo="Hello! This is an email sent via API.",
 )
 ```
 
 ---
 
-### 3. **Com anexo local**
+### 3. **With local attachment**
 
 ```python
 enviar_email(
     service=service,
-    destinatario="exemplo@dominio.com",
-    assunto="Relatório",
-    corpo="Segue em anexo.",
+    destinatario="example@domain.com",
+    assunto="Report",
+    corpo="Please find the attachment.",
     caminho_anexo="relatorios/relatorio.pdf"
 )
 ```
 
 ---
 
-### 4. **Com anexo em memória (`BytesIO`)**
+### 4. **With in-memory attachment (`BytesIO`)**
 
 ```python
 from io import BytesIO
 
 buffer = BytesIO()
-buffer.write(b"PDF fake aqui")  # simule um PDF
+buffer.write(b"Fake PDF content here")  # simulate a PDF
 buffer.seek(0)
 
 enviar_email(
     service=service,
-    destinatario="exemplo@dominio.com",
-    assunto="Relatório Gerado",
-    corpo="Segue o PDF em memória.",
+    destinatario="example@domain.com",
+    assunto="Generated Report",
+    corpo="Here is the in-memory PDF.",
     anexo_buffer=buffer,
-    nome_anexo="meu_arquivo.pdf"
+    nome_anexo="my_file.pdf"
 )
 ```
 
 ---
 
-### 5. **Com múltiplos anexos (`dict` com buffers)**
+### 5. **With multiple attachments (`dict` of buffers)**
 
 ```python
 from io import BytesIO
 
 anexos = {
-    "arquivo1.pdf": BytesIO(b"conteudo1"),
-    "arquivo2.pdf": BytesIO(b"conteudo2"),
+    "file1.pdf": BytesIO(b"content1"),
+    "file2.pdf": BytesIO(b"content2"),
 }
 
 for buf in anexos.values():
@@ -110,23 +111,23 @@ for buf in anexos.values():
 
 enviar_email(
     service=service,
-    destinatario="exemplo@dominio.com",
-    assunto="Múltiplos relatórios",
-    corpo="Segue mais de um anexo.",
+    destinatario="example@domain.com",
+    assunto="Multiple Reports",
+    corpo="Multiple attachments included.",
     multiplos_anexos=anexos
 )
 ```
 
 ---
 
-### 6. **Enviar conteúdo HTML (opcional)**
+### 6. **Send HTML content (optional)**
 
 ```python
 enviar_email(
     service=service,
-    destinatario="exemplo@dominio.com",
-    assunto="E-mail com HTML",
-    corpo="<h1>Olá!</h1><p>Este é um e-mail com <b>HTML</b>.</p>",
+    destinatario="example@domain.com",
+    assunto="HTML Email",
+    corpo="<h1>Hello!</h1><p>This is an email with <b>HTML</b>.</p>",
     html=True
 )
 ```
@@ -135,7 +136,7 @@ enviar_email(
 
 ## 📝 Logs
 
-O módulo usa `logging` para registrar eventos importantes. Para ativar logs no seu script principal:
+The module uses `logging` to record important events. To enable logging in your main script:
 
 ```python
 import logging
@@ -145,9 +146,9 @@ logging.basicConfig(level=logging.INFO)
 
 ---
 
-## ✅ Escopos utilizados
+## ✅ Used Scopes
 
-Este módulo usa os seguintes escopos da API Gmail:
+This module uses the following Gmail API scopes:
 
 - `https://mail.google.com/`
 - `https://www.googleapis.com/auth/gmail.send`
@@ -156,13 +157,13 @@ Este módulo usa os seguintes escopos da API Gmail:
 
 ---
 
-## 🛡️ Segurança
+## 🛡️ Security
 
-- Nunca compartilhe seu `client_secret.json` ou `token.json`.
-- Use variáveis de ambiente ou `gitignore` para evitar vazamento dos arquivos de credenciais.
+- Never share your `client_secret.json` or `token.json`.
+- Use environment variables or `.gitignore` to prevent leaking credential files.
 
 ---
 
-## 📄 Licença
+## 📄 License
 
-Distribuído sob a licença privada interna do Bistek Supermercados. Qualquer redistribuição e utilização sem autorização é estritamente proibida.
+Distributed under internal private license. Redistribution or usage without authorization is strictly prohibited.
