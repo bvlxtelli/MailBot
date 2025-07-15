@@ -1,5 +1,5 @@
 
-# 📧 **MailBot** *by Matheus Moura*
+# 📧 **MailBot** *Optimized Python e-mail client*
 
 This module enables sending emails with or without attachments using the Gmail API and Google's OAuth2 authentication. It supports local file attachments, in-memory attachments (`BytesIO`), and multiple PDF files.
 
