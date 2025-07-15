@@ -1,4 +1,4 @@
-# 📧 **MailBot** *Cliente Python para e-mails otimizado*
+# 📧 **MailBot** - *Cliente Python para e-mails otimizado*
 
 Este módulo permite o envio de e-mails com ou sem anexos usando a API do Gmail com autenticação OAuth2 do Google. É compatível com envio de anexos locais, anexos em memória (`BytesIO`) e múltiplos arquivos PDF.
 
