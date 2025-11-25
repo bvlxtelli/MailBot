@@ -107,18 +107,20 @@ def criar_mensagem(destinatario, assunto, corpo, caminho_anexo=None, anexo_buffe
 
     return {'raw': mensagem_base64}
 
-def enviar_email(service, destinatario, assunto, corpo, caminho_anexo=None, anexo_buffer=None, nome_anexo=None, multiplos_anexos=None, html=False):
-  
-  mensagem = criar_mensagem(
-    destinatario=destinatario,
-    assunto=assunto,
-    corpo=corpo,
-    caminho_anexo=caminho_anexo,
-    anexo_buffer=anexo_buffer,
-    nome_anexo=nome_anexo,
-    multiplos_anexos=multiplos_anexos,
-    html=html
-    )
-  send_message = service.users().messages().send(userId='me', body=mensagem).execute()
-  
-  logger.info(f"E-mail enviado! ID da mensagem: {send_message['id']}")
+def enviar_email(destinatario, assunto, corpo, caminho_anexo=None, anexo_buffer=None, nome_anexo=None, multiplos_anexos=None, html=False):
+
+    service = login()
+
+    mensagem = criar_mensagem(
+        destinatario=destinatario,
+        assunto=assunto,
+        corpo=corpo,
+        caminho_anexo=caminho_anexo,
+        anexo_buffer=anexo_buffer,
+        nome_anexo=nome_anexo,
+        multiplos_anexos=multiplos_anexos,
+        html=html
+        )
+    send_message = service.users().messages().send(userId='me', body=mensagem).execute()
+    
+    logger.info(f"E-mail enviado! ID da mensagem: {send_message['id']}")
